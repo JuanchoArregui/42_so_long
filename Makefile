@@ -6,7 +6,7 @@
 #    By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/05 16:13:08 by jarregui          #+#    #+#              #
-#    Updated: 2024/03/31 20:06:28 by jarregui         ###   ########.fr        #
+#    Updated: 2024/04/01 22:50:04 by jarregui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,16 +37,7 @@ DARK_YELLOW		=	\033[38;5;143m
 # else
 # 	INCLUDES = -I/opt/X11/include -Imlx
 # endif
- 
-# MLX_DIR = ./mlx
-# MLX_LIB = $(MLX_DIR)/libmlx_$(UNAME).a
 
-# REQUIRED LIBRARIES for LInux or Mac
-# ifeq ($(shell uname), Linux)
-# 	MLX_FLAGS = -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11
-# else
-# 	MLX_FLAGS = -Lmlx -lmlx -L/usr/X11/lib -lXext -lX11 -framework OpenGL -framework AppKit
-# endif
 
 SRCS		=	main.c \
 			./my_files/stuff.c \
@@ -76,8 +67,20 @@ RM				=	rm -f
 AR				=	ar rc
 RN				=	ranlib
 # CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address
-CFLAGS			=	-Wall -Wextra -Werror -MMD
-MLX_FLAGS		=	-L. -lmlx -framework OpenGL -framework AppKit
+CFLAGS			=	-Wall -Wextra -Werror
+
+# MinilibX directory, macro and flags for LInux or Mac
+ifeq ($(shell uname), Linux)
+	MLX_DIR = ./mlx/linux
+	CFLAGS += -DLINUX -Wno-unused-result
+	MLX_FLAGS		=	-L. -lmlx -lXext -lX11 -lm -lbsd
+else
+	MLX_DIR = ./mlx/mac
+	CFLAGS += -DMAC
+	MLX_FLAGS =	-L. -lmlx -framework OpenGL -framework AppKit
+endif
+
+
 
 .c.o:
 				@echo "$(BROWN)Compiling   ${MAGENTA}→   $(CYAN)$< $(DEF_COLOR)"
@@ -94,8 +97,8 @@ all:		$(NAME)
 -include $(DEPS)
 ${NAME}:	${OBJS}
 				@echo "\n${ORANGE}Minilibx compilation $(DEF_COLOR)\n"
-				@make -C ./mlx all
-				@cp ./mlx/libmlx.a .
+				@make -C ${MLX_DIR} all
+				@cp ${MLX_DIR}/libmlx.a .
 				@$(CC) $(SRCS) $(MLX_FLAGS) -o $(NAME)
 				@echo "$(GREEN)✓ Created ${NAME}$(DEF_COLOR)\n"
 
@@ -104,19 +107,19 @@ ${NAME}:	${OBJS}
 bonus: ${BONUS_OBJECTS}
 				@echo "\n${ORANGE}Minilibx compilation $(DEF_COLOR)\n"
 				@touch $@
-				@make -C ./mlx all
-				@cp ./mlx/libmlx.a .
+				@make -C ${MLX_DIR} all
+				@cp ${MLX_DIR}/libmlx.a .
 				@$(CC) $(SRCS_BONUS) $(LIB) -o $(BONUS_NAME)
 				@echo "$(GREEN)✓ Created ${BONUS_NAME}$(DEF_COLOR)\n"
 
 clean:
-				@make -C ./mlx clean
+				@make -C ${MLX_DIR} clean
 				@${RM} ${OBJS} ${BONUS_OBJECTS}
 				@${RM} ${DEPS} ${DEPS2}
 				@echo "\n$(GREEN)✓ All objects cleaned successfully$(DEF_COLOR)\n"
 
 fclean:
-				@make -C ./mlx clean
+				@make -C ${MLX_DIR} clean
 				@${RM} ${OBJS} ${BONUS_OBJECTS}
 				@${RM} ${DEPS} ${DEPS2}
 				@${RM} bonus

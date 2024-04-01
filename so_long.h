@@ -6,12 +6,17 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:38:26 by jarregui          #+#    #+#             */
-/*   Updated: 2024/03/31 20:19:10 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/01 23:10:41 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+#ifdef LINUX
+# include "mlx/linux/mlx.h"
+#else
+# include "mlx/mac/mlx.h"
+#endif
 
 // # include<unistd.h>
 // # include<limits.h>
@@ -19,7 +24,6 @@
 // # include<fcntl.h>
 
 # include <stdlib.h>
-# include "mlx/mlx.h"
 // # include "my_libs/libft/libft.h"
 // # include "my_libs/printf/printf.h"
 
