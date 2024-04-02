@@ -6,7 +6,7 @@
 #    By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/05 16:13:08 by jarregui          #+#    #+#              #
-#    Updated: 2024/04/02 23:01:30 by jarregui         ###   ########.fr        #
+#    Updated: 2024/04/02 23:34:37 by jarregui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,10 +65,10 @@ CFLAGS			=	-Wall -Wextra -Werror
 
 # MinilibX directory, macro and flags for LInux or Mac
 ifeq ($(shell uname), Linux)
-	MLX_DIR = ./mlx_linux/
+	MLX_DIR = mlx_linux
 	CFLAGS +=  -Wno-unused-result
 else
-	MLX_DIR = ./mlx/
+	MLX_DIR = mlx
 endif
 
 MLX_FLAGS		=	-L$(MLX_DIR) -lmlx
@@ -79,12 +79,12 @@ else
 	MLX_FLAGS += -framework OpenGL -framework AppKit
 endif
 
-MLX_LIB = $(MLX_DIR)libmlx.a
+MLX_LIB = $(MLX_DIR)/libmlx.a
 LIBFT_DIR = ./my_libs/libft/
 LIBFT_LIB = $(LIBFT_DIR)libft.a
 PRINTF_DIR = ./my_libs/printf/
 PRINTF_LIB = $(PRINTF_DIR)printf.a
-INCLUDE_FLAGS	=	-I/usr/include -I$(LIBFT_DIR) -I$(PRINTF_DIR) -I$(MLX_DIR) 
+INCLUDE_FLAGS	= -I$(LIBFT_DIR) -I$(PRINTF_DIR) -I$(MLX_DIR) 
 
 OBJS			=	${SRCS:.c=.o}
 BONUS_OBJECTS	=	${SRCS_BONUS:.c=.o}
@@ -92,11 +92,12 @@ BONUS_OBJECTS	=	${SRCS_BONUS:.c=.o}
 # RULES DECLARATION:
 all: subsystems	$(NAME)
 
-%.o : %.c
-	@echo "$(BROWN)Compiling [$<]...${DEF_COLOR}"
-	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c -o $@ $< 
+# %.o : %.c
+# 	@echo "$(BROWN)Compiling [$<]...${DEF_COLOR}"
+# 	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c -o $@ $< 
 
 subsystems:
+	@echo "\n${ORANGE}********************** INCLUDE_FLAGS $(INCLUDE_FLAGS) $(DEF_COLOR)"
 	@echo "\n${ORANGE}********************** $(DEF_COLOR)"
 	@echo "${ORANGE}Minilibx compilation: $(DEF_COLOR)"
 	make -C $(MLX_DIR) all

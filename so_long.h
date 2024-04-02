@@ -6,16 +6,16 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:38:26 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/02 12:12:59 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/02 23:27:46 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "mlx.h"
 # include "libft.h"
 # include "printf.h"
+# include "mlx.h"
 # include <stdlib.h>
 
 
