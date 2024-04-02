@@ -6,7 +6,7 @@
 #    By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/05 16:13:08 by jarregui          #+#    #+#              #
-#    Updated: 2024/04/02 12:12:05 by jarregui         ###   ########.fr        #
+#    Updated: 2024/04/02 23:01:30 by jarregui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,16 +65,16 @@ CFLAGS			=	-Wall -Wextra -Werror
 
 # MinilibX directory, macro and flags for LInux or Mac
 ifeq ($(shell uname), Linux)
-	MLX_DIR = ./mlx/linux/
-	MACROS = -DLINUX
+	MLX_DIR = ./mlx_linux/
 	CFLAGS +=  -Wno-unused-result
 else
-	MLX_DIR = ./mlx/mac/
-	MACROS = -DMAC
+	MLX_DIR = ./mlx/
 endif
+
 MLX_FLAGS		=	-L$(MLX_DIR) -lmlx
+
 ifeq ($(shell uname), Linux)
-	MLX_FLAGS += -lXext -lX11 -lm -lbsd
+	MLX_FLAGS += -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 else
 	MLX_FLAGS += -framework OpenGL -framework AppKit
 endif
@@ -84,7 +84,7 @@ LIBFT_DIR = ./my_libs/libft/
 LIBFT_LIB = $(LIBFT_DIR)libft.a
 PRINTF_DIR = ./my_libs/printf/
 PRINTF_LIB = $(PRINTF_DIR)printf.a
-INCLUDE_FLAGS	=	-I$(LIBFT_DIR) -I$(PRINTF_DIR) -I$(MLX_DIR)
+INCLUDE_FLAGS	=	-I/usr/include -I$(LIBFT_DIR) -I$(PRINTF_DIR) -I$(MLX_DIR) 
 
 OBJS			=	${SRCS:.c=.o}
 BONUS_OBJECTS	=	${SRCS_BONUS:.c=.o}
@@ -94,7 +94,7 @@ all: subsystems	$(NAME)
 
 %.o : %.c
 	@echo "$(BROWN)Compiling [$<]...${DEF_COLOR}"
-	@$(CC) $(CFLAGS) -c -o $@ $<  $(INCLUDE_FLAGS)
+	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c -o $@ $< 
 
 subsystems:
 	@echo "\n${ORANGE}********************** $(DEF_COLOR)"
@@ -114,8 +114,16 @@ subsystems:
 ${NAME}:	${OBJS}
 	@echo "\n${ORANGE}********************** $(DEF_COLOR)"
 	@echo "${ORANGE}So_long compilation $(DEF_COLOR)"
-	@$(CC) ${CFLAGS} $(INCLUDE_FLAGS) $(MLX_FLAGS) $(MACROS) ${OBJS} ${MLX_LIB} ${LIBFT_LIB} ${PRINTF_LIB} -o $(NAME)
+	@$(CC) ${CFLAGS} $(INCLUDE_FLAGS) $(MLX_FLAGS) ${OBJS} ${MLX_LIB} ${LIBFT_LIB} ${PRINTF_LIB} -o $(NAME)
 	@echo "$(GREEN)✓ Created ${NAME}$(DEF_COLOR)\n"
+
+install_mlx:
+	@echo "Copying libmlx.a to /usr/lib/X11"
+	@sudo cp $(MLX_DIR)libmlx.a /usr/lib/X11
+	@echo "Copying libmlx_Linux.a to /usr/lib/X11"
+	@sudo cp $(MLX_DIR)libmlx_Linux.a /usr/lib/X11
+	@echo "Copying mlx.h to /usr/include/X11"
+	@sudo cp $(MLX_DIR)mlx.h /usr/include/X11/
 
 bonus: ${BONUS_OBJECTS}
 	@echo "\n${ORANGE}Minilibx compilation $(DEF_COLOR)\n"
@@ -135,4 +143,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re
+.PHONY: all bonus install_mlx clean fclean re

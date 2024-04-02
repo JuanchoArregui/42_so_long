@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:12:20 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/02 12:17:35 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/02 21:47:50 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	main(void)
 {
 	void	*mlx;
-	void	*mlx_win;
+	// void	*mlx_win;
 	void	*img;
 	char	*relative_path = "./sprites/other/Logo/logo.xpm";
 	int		img_width;
@@ -29,7 +29,8 @@ int	main(void)
 		ft_printf("imagen no encontrada");
 	else
 		ft_printf("imagen cargada con width: %d y width: %d",img_width, img_height);
-	mlx_win = mlx_new_window(mlx, 600, 300, "Hello world!");
+		
+	// mlx_win = mlx_new_window(mlx, 600, 300, "Hello world!");
 	mlx_loop(mlx);
 	return (0);
 }
