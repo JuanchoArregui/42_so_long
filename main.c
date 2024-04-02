@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:12:20 by jarregui          #+#    #+#             */
-/*   Updated: 2024/03/31 20:12:06 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/02 01:11:19 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@ int	main(void)
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
+
+	printf("entrando en MAIN\n");
+
+	#ifdef LINUX
+		printf("LINUX is defined\n");
+	#endif
 
 	mlx_ptr = mlx_init();
 	if (!mlx_ptr)

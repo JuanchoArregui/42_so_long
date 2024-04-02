@@ -6,7 +6,7 @@
 #    By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/05 16:13:08 by jarregui          #+#    #+#              #
-#    Updated: 2024/04/01 22:50:04 by jarregui         ###   ########.fr        #
+#    Updated: 2024/04/02 10:18:08 by jarregui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,12 +53,6 @@ SRCS		=	main.c \
 
 SRCS_BONUS	=	./my_bonus/stuff_bonus.c
 
-# INCLUD =		so_long.h \
-# 				./mlx/mlx.h
-
-# INCLUD_BNS = so_long_bonus.h \
-# 			./mlx/mlx.h
-
 # VARIABLES DECLARATION:
 NAME			=	so_long
 BONUS_NAME		=	so_long_bonus
@@ -71,62 +65,68 @@ CFLAGS			=	-Wall -Wextra -Werror
 
 # MinilibX directory, macro and flags for LInux or Mac
 ifeq ($(shell uname), Linux)
-	MLX_DIR = ./mlx/linux
-	CFLAGS += -DLINUX -Wno-unused-result
-	MLX_FLAGS		=	-L. -lmlx -lXext -lX11 -lm -lbsd
+	MLX_DIR = ./mlx/linux/
+	MACROS = -DLINUX
+	CFLAGS +=  -Wno-unused-result
 else
-	MLX_DIR = ./mlx/mac
-	CFLAGS += -DMAC
-	MLX_FLAGS =	-L. -lmlx -framework OpenGL -framework AppKit
+	MLX_DIR = ./mlx/mac/
+	MACROS = -DMAC
+endif
+MLX_FLAGS		=	-L$(MLX_DIR) -lmlx
+ifeq ($(shell uname), Linux)
+	MLX_FLAGS += -lXext -lX11 -lm -lbsd
+else
+	MLX_FLAGS += -framework OpenGL -framework AppKit
 endif
 
-
-
-.c.o:
-				@echo "$(BROWN)Compiling   ${MAGENTA}→   $(CYAN)$< $(DEF_COLOR)"
-				@${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+MLX_LIB = $(MLX_DIR)libmlx.a
+LIBFT_DIR = ./my_libs/libft/
+LIBFT_LIB = $(LIBFT_DIR)libft.a
+INCLUDE_FLAGS	=	-I$(LIBFT_DIR) -I$(MLX_DIR)
 
 OBJS			=	${SRCS:.c=.o}
 BONUS_OBJECTS	=	${SRCS_BONUS:.c=.o}
-DEPS			=	$(addsuffix .d, $(basename $(SRCS)))
-DEPS2			=	$(addsuffix .d, $(basename $(SRCS_BONUS)))
 
 # RULES DECLARATION:
-all:		$(NAME)
+all: subsystems	$(NAME)
 
--include $(DEPS)
+%.o : %.c
+	@echo "$(BROWN)Compiling [$<]...${DEF_COLOR}"
+	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c -o $@ $<
+
+subsystems:
+	@echo "\n${ORANGE}********************** $(DEF_COLOR)"
+	@echo "${ORANGE}Minilibx compilation: $(DEF_COLOR)"
+	make -C $(MLX_DIR) all
+	@echo "$(GREEN)✓ Created ${MLX_LIB} $(DEF_COLOR)"
+	@echo "\n${ORANGE}********************** $(DEF_COLOR)"
+	@echo "${ORANGE}Libft compilation: $(DEF_COLOR)"
+	make -C $(LIBFT_DIR) all
+	@echo "$(GREEN)✓ Created ${LIBFT_LIB} $(DEF_COLOR)"
+
+
 ${NAME}:	${OBJS}
-				@echo "\n${ORANGE}Minilibx compilation $(DEF_COLOR)\n"
-				@make -C ${MLX_DIR} all
-				@cp ${MLX_DIR}/libmlx.a .
-				@$(CC) $(SRCS) $(MLX_FLAGS) -o $(NAME)
-				@echo "$(GREEN)✓ Created ${NAME}$(DEF_COLOR)\n"
+	@echo "\n${ORANGE}********************** $(DEF_COLOR)"
+	@echo "${ORANGE}So_long compilation $(DEF_COLOR)"
+	@$(CC) ${CFLAGS} $(INCLUDE_FLAGS) $(MLX_FLAGS) $(MACROS) ${OBJS} ${MLX_LIB} ${LIBFT_LIB} -o $(NAME)
+	@echo "$(GREEN)✓ Created ${NAME}$(DEF_COLOR)\n"
 
-
--include $(DEPS2)
 bonus: ${BONUS_OBJECTS}
-				@echo "\n${ORANGE}Minilibx compilation $(DEF_COLOR)\n"
-				@touch $@
-				@make -C ${MLX_DIR} all
-				@cp ${MLX_DIR}/libmlx.a .
-				@$(CC) $(SRCS_BONUS) $(LIB) -o $(BONUS_NAME)
-				@echo "$(GREEN)✓ Created ${BONUS_NAME}$(DEF_COLOR)\n"
+	@echo "\n${ORANGE}Minilibx compilation $(DEF_COLOR)\n"
+	@touch $@
+	@make -C ${MLX_DIR} all
+	@cp ${MLX_DIR}/libmlx.a .
+	@$(CC) $(SRCS_BONUS) $(MLX_FLAGS) -o $(BONUS_NAME)
+	@echo "$(GREEN)✓ Created ${BONUS_NAME}$(DEF_COLOR)\n"
 
 clean:
-				@make -C ${MLX_DIR} clean
-				@${RM} ${OBJS} ${BONUS_OBJECTS}
-				@${RM} ${DEPS} ${DEPS2}
-				@echo "\n$(GREEN)✓ All objects cleaned successfully$(DEF_COLOR)\n"
+	@${RM} ${OBJS} ${BONUS_OBJECTS}
+	@echo "\n$(GREEN)✓ All objects cleaned successfully$(DEF_COLOR)\n"
 
-fclean:
-				@make -C ${MLX_DIR} clean
-				@${RM} ${OBJS} ${BONUS_OBJECTS}
-				@${RM} ${DEPS} ${DEPS2}
-				@${RM} bonus
-				@${RM} ${NAME} ${BONUS_NAME} libmlx.a
-				@echo "\n$(GREEN)✓ All objects and executable cleaned successfully$(DEF_COLOR)\n"
-
+fclean: clean
+	@${RM} ${NAME} ${BONUS_NAME}
+	@echo "\n$(GREEN)✓ All executable cleaned successfully$(DEF_COLOR)\n"
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re

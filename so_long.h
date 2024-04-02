@@ -6,17 +6,17 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:38:26 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/01 23:10:41 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/02 10:18:47 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-#ifdef LINUX
-# include "mlx/linux/mlx.h"
-#else
-# include "mlx/mac/mlx.h"
-#endif
+
+# include "mlx.h"
+# include "libft.h"
+
+
 
 // # include<unistd.h>
 // # include<limits.h>
@@ -27,39 +27,39 @@
 // # include "my_libs/libft/libft.h"
 // # include "my_libs/printf/printf.h"
 
-typedef struct s_list
-{
-	void	*mlx;
-	void	*win;
-	void	*bush;
-	void	*fond;
-	void	*poke;
-	void	*npc;
-	void	*npcstart;
-	void	*npcmv;
-	void	*npcleft;
-	void	*npclmv;
-	void	*npcright;
-	void	*npcrmv;
-	void	*npcback;
-	void	*npcbmv;
-	void	*imgexit;
-	int		errors;
-	int		moves;
-	int		npccontrol;
-	int		linecontrol;
-	int		x;
-	int		y;
-	int		consum;
-	int		ex;
-	int		back;
-	int		wall;
-	int		player;
-	int		enemy;
-	int		height_l;
-	int		width_l;
-	char	*big_line;
-}	t_list;
+// typedef struct s_list
+// {
+// 	void	*mlx;
+// 	void	*win;
+// 	void	*bush;
+// 	void	*fond;
+// 	void	*poke;
+// 	void	*npc;
+// 	void	*npcstart;
+// 	void	*npcmv;
+// 	void	*npcleft;
+// 	void	*npclmv;
+// 	void	*npcright;
+// 	void	*npcrmv;
+// 	void	*npcback;
+// 	void	*npcbmv;
+// 	void	*imgexit;
+// 	int		errors;
+// 	int		moves;
+// 	int		npccontrol;
+// 	int		linecontrol;
+// 	int		x;
+// 	int		y;
+// 	int		consum;
+// 	int		ex;
+// 	int		back;
+// 	int		wall;
+// 	int		player;
+// 	int		enemy;
+// 	int		height_l;
+// 	int		width_l;
+// 	char	*big_line;
+// }	t_list;
 
 // int		init_data(t_list *d, char *map);
 // int		ft_strlen(const char *s);
