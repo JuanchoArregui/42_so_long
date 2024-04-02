@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:12:20 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/02 12:07:05 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:16:57 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@ int	main(void)
 
 	mlx = mlx_init();
 
-	mlx_loop(mlx);
 	img = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);
 	if (!img)
 		ft_printf("imagen no encontrada");
 	else
 		ft_printf("imagen cargada con width: %d y width: %d",img_width, img_height);
+	mlx_win = mlx_new_window(mlx, 600, 300, "Hello world!");
+	mlx_loop(mlx);
+	return (0);
 }
 
 // int	main(void)
