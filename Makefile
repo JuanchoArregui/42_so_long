@@ -6,7 +6,7 @@
 #    By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/05 16:13:08 by jarregui          #+#    #+#              #
-#    Updated: 2024/04/02 10:18:08 by jarregui         ###   ########.fr        #
+#    Updated: 2024/04/02 11:18:35 by jarregui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,7 +92,7 @@ all: subsystems	$(NAME)
 
 %.o : %.c
 	@echo "$(BROWN)Compiling [$<]...${DEF_COLOR}"
-	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c -o $@ $<
+	@$(CC) $(CFLAGS) -c -o $@ $<  $(INCLUDE_FLAGS)
 
 subsystems:
 	@echo "\n${ORANGE}********************** $(DEF_COLOR)"
