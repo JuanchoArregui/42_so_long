@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:38:26 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/02 10:18:47 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:12:59 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "mlx.h"
 # include "libft.h"
+# include "printf.h"
+# include <stdlib.h>
 
 
 
@@ -23,9 +25,6 @@
 // # include<stdio.h>
 // # include<fcntl.h>
 
-# include <stdlib.h>
-// # include "my_libs/libft/libft.h"
-// # include "my_libs/printf/printf.h"
 
 // typedef struct s_list
 // {

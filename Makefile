@@ -6,7 +6,7 @@
 #    By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/05 16:13:08 by jarregui          #+#    #+#              #
-#    Updated: 2024/04/02 11:18:35 by jarregui         ###   ########.fr        #
+#    Updated: 2024/04/02 12:12:05 by jarregui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,7 +82,9 @@ endif
 MLX_LIB = $(MLX_DIR)libmlx.a
 LIBFT_DIR = ./my_libs/libft/
 LIBFT_LIB = $(LIBFT_DIR)libft.a
-INCLUDE_FLAGS	=	-I$(LIBFT_DIR) -I$(MLX_DIR)
+PRINTF_DIR = ./my_libs/printf/
+PRINTF_LIB = $(PRINTF_DIR)printf.a
+INCLUDE_FLAGS	=	-I$(LIBFT_DIR) -I$(PRINTF_DIR) -I$(MLX_DIR)
 
 OBJS			=	${SRCS:.c=.o}
 BONUS_OBJECTS	=	${SRCS_BONUS:.c=.o}
@@ -103,12 +105,16 @@ subsystems:
 	@echo "${ORANGE}Libft compilation: $(DEF_COLOR)"
 	make -C $(LIBFT_DIR) all
 	@echo "$(GREEN)✓ Created ${LIBFT_LIB} $(DEF_COLOR)"
+	@echo "\n${ORANGE}********************** $(DEF_COLOR)"
+	@echo "${ORANGE}printf compilation: $(DEF_COLOR)"
+	make -C $(PRINTF_DIR) all
+	@echo "$(GREEN)✓ Created ${PRINTF_LIB} $(DEF_COLOR)"
 
 
 ${NAME}:	${OBJS}
 	@echo "\n${ORANGE}********************** $(DEF_COLOR)"
 	@echo "${ORANGE}So_long compilation $(DEF_COLOR)"
-	@$(CC) ${CFLAGS} $(INCLUDE_FLAGS) $(MLX_FLAGS) $(MACROS) ${OBJS} ${MLX_LIB} ${LIBFT_LIB} -o $(NAME)
+	@$(CC) ${CFLAGS} $(INCLUDE_FLAGS) $(MLX_FLAGS) $(MACROS) ${OBJS} ${MLX_LIB} ${LIBFT_LIB} ${PRINTF_LIB} -o $(NAME)
 	@echo "$(GREEN)✓ Created ${NAME}$(DEF_COLOR)\n"
 
 bonus: ${BONUS_OBJECTS}
