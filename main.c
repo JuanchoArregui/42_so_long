@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:12:20 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/02 12:16:57 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:17:35 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	main(void)
 {
 	void	*mlx;
+	void	*mlx_win;
 	void	*img;
 	char	*relative_path = "./sprites/other/Logo/logo.xpm";
 	int		img_width;
