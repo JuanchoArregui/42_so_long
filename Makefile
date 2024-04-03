@@ -6,7 +6,7 @@
 #    By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/05 16:13:08 by jarregui          #+#    #+#              #
-#    Updated: 2024/04/03 11:58:13 by jarregui         ###   ########.fr        #
+#    Updated: 2024/04/03 14:04:57 by jarregui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,10 +84,13 @@ LIBFT_DIR = libs/libft
 LIBFT_LIB = $(LIBFT_DIR)/libft.a
 PRINTF_DIR = libs/printf
 PRINTF_LIB = $(PRINTF_DIR)/printf.a
-INCLUDE_FLAGS	= -I$(LIBFT_DIR) -I$(PRINTF_DIR) -I$(MLX_DIR) 
+GET_NEXT_LINE_DIR = libs/get_next_line
+GET_NEXT_LINE_LIB = $(GET_NEXT_LINE_DIR)/get_next_line.a
+INCLUDE_FLAGS	= -I$(LIBFT_DIR) -I$(PRINTF_DIR) -I$(GET_NEXT_LINE_DIR) -I$(MLX_DIR) 
 
 OBJS			=	${SRCS:.c=.o}
 BONUS_OBJECTS	=	${SRCS_BONUS:.c=.o}
+LIBS			=	${MLX_LIB} ${LIBFT_LIB} ${PRINTF_LIB} ${GET_NEXT_LINE_LIB}
 
 # RULES DECLARATION:
 all: subsystems	$(NAME)
@@ -97,24 +100,31 @@ all: subsystems	$(NAME)
 	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c -o $@ $< 
 
 subsystems:
-	@echo "\n${ORANGE}********************** INCLUDE_FLAGS $(INCLUDE_FLAGS) $(DEF_COLOR)"
 	@echo "\n${ORANGE}********************** $(DEF_COLOR)"
 	@echo "${ORANGE}Minilibx compilation: $(DEF_COLOR)"
-	make -C $(MLX_DIR) all
+	@${MAKE} -C $(MLX_DIR) all
 	@echo "$(GREEN)✓ Created ${MLX_LIB} $(DEF_COLOR)"
+	
 	@echo "\n${ORANGE}********************** $(DEF_COLOR)"
 	@echo "${ORANGE}Libft compilation: $(DEF_COLOR)"
-	make -C $(LIBFT_DIR) all
+	@${MAKE} -C $(LIBFT_DIR) all
 	@echo "$(GREEN)✓ Created ${LIBFT_LIB} $(DEF_COLOR)"
+
 	@echo "\n${ORANGE}********************** $(DEF_COLOR)"
 	@echo "${ORANGE}printf compilation: $(DEF_COLOR)"
-	make -C $(PRINTF_DIR) all
+	@${MAKE} -C $(PRINTF_DIR) all
 	@echo "$(GREEN)✓ Created ${PRINTF_LIB} $(DEF_COLOR)"
+
+	@echo "\n${ORANGE}********************** $(DEF_COLOR)"
+	@echo "${ORANGE}get_next_line compilation: $(DEF_COLOR)"
+	@${MAKE} -C $(GET_NEXT_LINE_DIR) all
+	@echo "$(GREEN)✓ Created ${GET_NEXT_LINE_LIB} $(DEF_COLOR)"
+
 	@echo "\n${ORANGE}********************** $(DEF_COLOR)"
 	@echo "${ORANGE}So_long compilation: $(DEF_COLOR)"
 
 ${NAME}:	${OBJS}
-	@$(CC) ${CFLAGS} $(INCLUDE_FLAGS) $(MLX_FLAGS) ${OBJS} ${MLX_LIB} ${LIBFT_LIB} ${PRINTF_LIB} -o $(NAME)
+	@$(CC) ${CFLAGS} $(INCLUDE_FLAGS) $(MLX_FLAGS) ${OBJS} ${LIBS} -o $(NAME)
 	@echo "$(GREEN)✓ Created ${NAME}$(DEF_COLOR)\n"
 
 install_mlx:
@@ -137,10 +147,16 @@ clean:
 	@${RM} ${OBJS} ${BONUS_OBJECTS}
 	@echo "\n$(GREEN)✓ All objects cleaned successfully$(DEF_COLOR)\n"
 
+cleanlibs: 
+	@${MAKE} -C $(MLX_DIR) clean
+	@${MAKE} -C $(LIBFT_DIR) clean
+	@${MAKE} -C $(PRINTF_DIR) clean
+	@${MAKE} -C $(GET_NEXT_LINE_DIR) clean
+
 fclean: clean
 	@${RM} ${NAME} ${BONUS_NAME}
 	@echo "\n$(GREEN)✓ All executable cleaned successfully$(DEF_COLOR)\n"
 
 re: fclean all
 
-.PHONY: all bonus install_mlx clean fclean re
+.PHONY: all bonus install_mlx clean cleanlibs fclean re

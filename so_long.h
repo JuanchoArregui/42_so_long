@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:38:26 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/03 12:23:49 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/03 13:42:15 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include "printf.h"
+# include "get_next_line.h"
 # include "mlx.h"
 # include <stdlib.h>
 
