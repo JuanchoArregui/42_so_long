@@ -3,19 +3,20 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: juancho <juancho@student.42.fr>            +#+  +:+       +#+         #
+#    By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/18 13:58:00 by jarregui          #+#    #+#              #
-#    Updated: 2023/12/14 12:44:23 by juancho          ###   ########.fr        #
+#    Updated: 2024/04/03 14:12:26 by jarregui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+NAME		=	printf.a
 
 # VARIABLES DECLARATION:
 CC			=	gcc
 CFLAGS		=	-Wall -Wextra -Werror
 # CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address
 ARFLAGS		=	rcs
-NAME		=	printf.a
 RM			=	/bin/rm -f
 EXEC_NAME	=	a.out
 

@@ -6,7 +6,7 @@
 #    By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/05 16:13:08 by jarregui          #+#    #+#              #
-#    Updated: 2024/04/03 14:04:57 by jarregui         ###   ########.fr        #
+#    Updated: 2024/04/03 14:10:07 by jarregui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -145,13 +145,17 @@ bonus: ${BONUS_OBJECTS}
 
 clean:
 	@${RM} ${OBJS} ${BONUS_OBJECTS}
-	@echo "\n$(GREEN)✓ All objects cleaned successfully$(DEF_COLOR)\n"
-
-cleanlibs: 
 	@${MAKE} -C $(MLX_DIR) clean
 	@${MAKE} -C $(LIBFT_DIR) clean
 	@${MAKE} -C $(PRINTF_DIR) clean
 	@${MAKE} -C $(GET_NEXT_LINE_DIR) clean
+	@echo "\n$(GREEN)✓ All objects cleaned successfully$(DEF_COLOR)\n"
+
+fcleanlibs: 
+	@${MAKE} -C $(MLX_DIR) fclean
+	@${MAKE} -C $(LIBFT_DIR) fclean
+	@${MAKE} -C $(PRINTF_DIR) fclean
+	@${MAKE} -C $(GET_NEXT_LINE_DIR) fclean
 
 fclean: clean
 	@${RM} ${NAME} ${BONUS_NAME}
@@ -159,4 +163,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all bonus install_mlx clean cleanlibs fclean re
+.PHONY: all bonus install_mlx clean fcleanlibs fclean re

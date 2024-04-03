@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:38:26 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/03 13:42:15 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:41:15 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,23 @@
 # include "mlx.h"
 # include <stdlib.h>
 
-void	ft_error(const char *text);
+typedef struct s_game
+{
+	int			debug;
+	size_t		map_height;
+	size_t		map_width;
+}	t_game;
 
-void	check_map(char *file_name);
-void	check_map_extension(char *file_name);
+int	ft_strlen_no_n(char *s);
+
+void	ft_exit_error(const char *text, t_game *game);
+void	ft_get_leaks(void);
+
+void	check_map(char *map, t_game *game);
+void	check_map_extension(char *map, t_game *game);
+void	check_map_dimensions(char *map, t_game *game);
+
+void	read_map(char *map, t_game *game);
 
 // # include<unistd.h>
 // # include<limits.h>

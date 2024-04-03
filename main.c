@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:12:20 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/03 12:28:48 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:08:40 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,18 @@
 
 int	main(int argc, char **argv)
 {
+	t_game	game;
+
+	game.debug = 1;
+	
+	//BORRAR ESTO ANTES DE ENTREGARRRRRR!!!
+	atexit(ft_get_leaks);
+
 	if (argc == 1)
-		ft_error("Introduzca el nombre del archivo con el mapa a jugar.");
+		ft_exit_error("Introduzca el nombre archivo del mapa a jugar.", &game);
 	if (argc != 2)
-		ft_error("Numero de argumentos incorrecto.");
-	check_map(argv[1]);
+		ft_exit_error("Numero de argumentos incorrecto.", &game);
+	check_map(argv[1], &game);
 
 
 
