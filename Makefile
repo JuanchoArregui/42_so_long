@@ -6,7 +6,7 @@
 #    By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/05 16:13:08 by jarregui          #+#    #+#              #
-#    Updated: 2024/04/02 23:34:37 by jarregui         ###   ########.fr        #
+#    Updated: 2024/04/03 11:58:13 by jarregui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ DARK_YELLOW		=	\033[38;5;143m
 
 
 SRCS		=	main.c \
-			./my_files/stuff.c \
+			files/stuff.c \
 # ft_printf.c \
 # fts_get.c \
 # fts_handling_main_txt.c \
@@ -51,7 +51,7 @@ SRCS		=	main.c \
 # fts_str.c \
 
 
-SRCS_BONUS	=	./my_bonus/stuff_bonus.c
+SRCS_BONUS	=	bonus/stuff_bonus.c
 
 # VARIABLES DECLARATION:
 NAME			=	so_long
@@ -80,10 +80,10 @@ else
 endif
 
 MLX_LIB = $(MLX_DIR)/libmlx.a
-LIBFT_DIR = ./my_libs/libft/
-LIBFT_LIB = $(LIBFT_DIR)libft.a
-PRINTF_DIR = ./my_libs/printf/
-PRINTF_LIB = $(PRINTF_DIR)printf.a
+LIBFT_DIR = libs/libft
+LIBFT_LIB = $(LIBFT_DIR)/libft.a
+PRINTF_DIR = libs/printf
+PRINTF_LIB = $(PRINTF_DIR)/printf.a
 INCLUDE_FLAGS	= -I$(LIBFT_DIR) -I$(PRINTF_DIR) -I$(MLX_DIR) 
 
 OBJS			=	${SRCS:.c=.o}
@@ -92,9 +92,9 @@ BONUS_OBJECTS	=	${SRCS_BONUS:.c=.o}
 # RULES DECLARATION:
 all: subsystems	$(NAME)
 
-# %.o : %.c
-# 	@echo "$(BROWN)Compiling [$<]...${DEF_COLOR}"
-# 	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c -o $@ $< 
+%.o : %.c
+	@echo "$(BROWN)Compiling [$<]...${DEF_COLOR}"
+	@$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c -o $@ $< 
 
 subsystems:
 	@echo "\n${ORANGE}********************** INCLUDE_FLAGS $(INCLUDE_FLAGS) $(DEF_COLOR)"
@@ -110,11 +110,10 @@ subsystems:
 	@echo "${ORANGE}printf compilation: $(DEF_COLOR)"
 	make -C $(PRINTF_DIR) all
 	@echo "$(GREEN)✓ Created ${PRINTF_LIB} $(DEF_COLOR)"
-
+	@echo "\n${ORANGE}********************** $(DEF_COLOR)"
+	@echo "${ORANGE}So_long compilation: $(DEF_COLOR)"
 
 ${NAME}:	${OBJS}
-	@echo "\n${ORANGE}********************** $(DEF_COLOR)"
-	@echo "${ORANGE}So_long compilation $(DEF_COLOR)"
 	@$(CC) ${CFLAGS} $(INCLUDE_FLAGS) $(MLX_FLAGS) ${OBJS} ${MLX_LIB} ${LIBFT_LIB} ${PRINTF_LIB} -o $(NAME)
 	@echo "$(GREEN)✓ Created ${NAME}$(DEF_COLOR)\n"
 

@@ -6,32 +6,22 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:12:20 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/02 21:47:50 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/03 12:28:48 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	void	*mlx;
-	// void	*mlx_win;
-	void	*img;
-	char	*relative_path = "./sprites/other/Logo/logo.xpm";
-	int		img_width;
-	int		img_height;
+	if (argc == 1)
+		ft_error("Introduzca el nombre del archivo con el mapa a jugar.");
+	if (argc != 2)
+		ft_error("Numero de argumentos incorrecto.");
+	check_map(argv[1]);
 
 
-	mlx = mlx_init();
 
-	img = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);
-	if (!img)
-		ft_printf("imagen no encontrada");
-	else
-		ft_printf("imagen cargada con width: %d y width: %d",img_width, img_height);
-		
-	// mlx_win = mlx_new_window(mlx, 600, 300, "Hello world!");
-	mlx_loop(mlx);
 	return (0);
 }
 

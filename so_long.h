@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:38:26 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/02 23:27:46 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/03 12:23:49 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@
 # include "mlx.h"
 # include <stdlib.h>
 
+void	ft_error(const char *text);
 
+void	check_map(char *file_name);
+void	check_map_extension(char *file_name);
 
 // # include<unistd.h>
 // # include<limits.h>
