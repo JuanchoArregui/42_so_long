@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 19:53:40 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/16 10:43:40 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/16 17:08:40 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ int	ft_strlen_no_n(char *s)
 {
 	size_t	length;
 
+	// printf("\n********** DENTRO de ft_strlen. Línea recibida: %s", s);
+
 	length = ft_strlen(s);
-	printf("\n\n\n* length: %zu, %c", length, s[length - 1]);
+	// printf("\n* length: %zu, %c", length, s[length - 1]);
 
 	if (s[length - 1] != '\n')
 		printf("\n---- %c", s[length - 1]);
@@ -26,7 +28,7 @@ int	ft_strlen_no_n(char *s)
 	if (length && s[length - 1] == '\n')
 		length -= 1;
 
-	printf("\nto return length: %zu", length);
+	// printf("\nto return length: %zu", length);
 
 
 	return (length);
@@ -46,7 +48,9 @@ void	ft_exit_error(const char *text, t_game *game)
 
 void	ft_get_leaks(void)
 {
+	ft_printf("\n\nCHECKING FOR LEAKS AT EXIT:\n");
 	system("leaks -q so_long");
+	ft_printf("\n");
 }
 
 
@@ -113,13 +117,15 @@ void	check_map_dimensions(char *map, t_game *game)
 		i++;
 		free(line);
 		line = get_next_line(fd);
-		length = ft_strlen_no_n(line);
+		ft_printf("\n\n\n\n********** ANTES DE LLAMAR ft_strlen_no_n. ESTA ES LA LINEA:: %s", line);
+		if (line != NULL)
+			length = ft_strlen_no_n(line);
 		if (line != NULL && game->map_width != length)
 		{
 			if (game->debug)
 			{
 
-				ft_printf("\nMap dim. KO: %d x %d. %s", game->map_width, length, line);
+				ft_printf("\n❌ Map dim. KO: %d x %d. %s", game->map_width, length, line);
 			}
 			free(line);
 			ft_exit_error("El mapa no es rectangular", game);
@@ -127,5 +133,5 @@ void	check_map_dimensions(char *map, t_game *game)
 	}
 	game->map_height = i;
 	if (game->debug)
-		ft_printf("\nMap dim. OK: %d x %d", game->map_width, game->map_height);
+		ft_printf("\n✅ Map dim. OK: %d x %d", game->map_width, game->map_height);
 }
