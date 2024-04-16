@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 19:53:40 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/03 17:01:01 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/16 10:43:40 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	ft_strlen_no_n(char *s)
 		length -= 1;
 
 	printf("\nto return length: %zu", length);
+
 
 	return (length);
 }
