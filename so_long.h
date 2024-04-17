@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:38:26 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/17 16:26:57 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/17 16:56:14 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void	check_map_chars(char *map, t_game *game);
 // files/map_set_game.c
 void	set_map_array(char *map, t_game *game);
 size_t	indx(size_t x, size_t y, size_t z, t_game *game);
-
+void	check_map_array(t_game *game);
+void	check_map_boundaries(t_game *game);
 
 // # include<unistd.h>
 // # include<limits.h>

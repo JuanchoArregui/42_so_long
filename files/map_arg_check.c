@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 19:53:40 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/17 13:04:20 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:05:17 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	check_map(char *map, t_game *game)
 	if (game->debug)
 		ft_printf("\n✅ Map extension OK: '.ber'\n");
 	check_map_dimensions(map, game);
-	if (game->map_y < 4)
+	if (game->map_y < 3)
 		ft_exit_error("Error altura mínima mapa", game);
 	if (game->debug)
 		ft_printf("\n✅ Map dim. OK: %d x %d\n", game->map_x, game->map_y);
@@ -75,7 +75,7 @@ void	check_map_dimensions(char *map, t_game *game)
 	while (line != NULL)
 	{
 		game->map_x = ft_strlen_no_n(line);
-		if (game->map_x < 4)
+		if (game->map_x < 3)
 		{
 			free(line);
 			ft_exit_error("Error ancho mínimo mapa o linea vacía", game);
