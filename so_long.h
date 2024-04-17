@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:38:26 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/17 11:58:16 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/17 16:26:57 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,33 @@ typedef struct s_game
 	size_t		map_y;
 	size_t		map_z;
 	int			*map_array;
+
+	int			collectibles;
+	int			exits;
+	int			players;
+
+	int			player_x;
+	int			player_y;
+	int			player_steps;
+	int			player_score;
 }	t_game;
 
+// files/stuff.c
 size_t	ft_strlen_no_n(char *s);
 void	ft_exit_error(const char *text, t_game *game);
 void	ft_get_leaks(void);
 void	init_game(t_game *game);
 
+// files/map_arg_check.c
 void	check_map(char *map, t_game *game);
 void	check_map_extension(char *map, t_game *game);
 void	read_map(char *map, t_game *game);
 void	check_map_dimensions(char *map, t_game *game);
-// void	check_map_chars(char *map, t_game *game);
+void	check_map_chars(char *map, t_game *game);
+
+// files/map_set_game.c
+void	set_map_array(char *map, t_game *game);
+size_t	indx(size_t x, size_t y, size_t z, t_game *game);
 
 
 // # include<unistd.h>

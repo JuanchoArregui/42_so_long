@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:12:20 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/17 11:58:16 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/17 14:31:23 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	game.debug = 1;
-	
 	//BORRAR ESTO ANTES DE ENTREGARRRRRR!!!
 	atexit(ft_get_leaks);
 
@@ -27,10 +25,10 @@ int	main(int argc, char **argv)
 		ft_exit_error("Numero de argumentos incorrecto.", &game);
 	init_game(&game);
 	check_map(argv[1], &game);
-	// set_map_array(argv[1], &game);
+	set_map_array(argv[1], &game);
 
 
-
+	free(game.map_array);
 	return (0);
 }
 
