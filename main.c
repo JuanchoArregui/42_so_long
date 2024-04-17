@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:12:20 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/03 16:08:40 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/17 11:58:16 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ int	main(int argc, char **argv)
 		ft_exit_error("Introduzca el nombre archivo del mapa a jugar.", &game);
 	if (argc != 2)
 		ft_exit_error("Numero de argumentos incorrecto.", &game);
+	init_game(&game);
 	check_map(argv[1], &game);
+	// set_map_array(argv[1], &game);
 
 
 
