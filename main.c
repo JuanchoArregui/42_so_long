@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:12:20 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/17 17:08:50 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:50:55 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ int	main(int argc, char **argv)
 		ft_exit_error("Numero de argumentos incorrecto.", &game);
 	init_game(&game);
 	check_map(argv[1], &game);
-	set_map_array(argv[1], &game);
+	init_maps(&game);
+	set_maps(argv[1], &game);
+
+	
+
 	check_map_array(&game);
 
 	free(game.map_array);
@@ -35,7 +39,7 @@ int	main(int argc, char **argv)
 
 
 //TODO: 
-//set_map_array()  reduciir nº lineas y que cumpla norma:
+//set_maps()  reduciir nº lineas y que cumpla norma:
 // imprimir capa bordes
 // imprimir capa collectibles
 //Mirar como checar que el mapa sea resoluble ?????

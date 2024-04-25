@@ -6,37 +6,22 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:18:43 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/17 16:56:47 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:25:01 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	set_map_array(char *map, t_game *game)
+void	set_maps(char *map, t_game *game)
 {
-	size_t	xyz;
 	int		fd;
 	char	*line;
-
 	size_t	x;
 	size_t	y;
-
-
-	xyz = game->map_x * game->map_y * game->map_z;
-	game->map_array = (int *)malloc(xyz * sizeof(int));
-	if (!game->map_array)
-		ft_exit_error("Error al reservar memoria", game);
-	while (xyz > 0)
-	{
-		game->map_array[xyz - 1] = 0;
-		xyz--;
-	}
-
 
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
 		ft_exit_error("Error al abrir el archivo.", game);
-
 	y = 0;
 	while (y < game->map_y)
 	{
@@ -44,30 +29,7 @@ void	set_map_array(char *map, t_game *game)
 		x = 0;
 		while (x < game->map_x)
 		{
-			if (line[x] == '0')
-				game->map_array[indx(x, y, 0, game)] = 0;
-			else if (line[x] == '1')
-				game->map_array[indx(x, y, 0, game)] = 1;
-			else if (line[x] == 'C')
-			{
-				game->collectibles += 1;
-				game->map_array[indx(x, y, 1, game)] = 1;
-			}
-			else if (line[x] == 'E')
-			{
-				game->exits += 1;
-				game->map_array[indx(x, y, 1, game)] = 2;
-			}
-			else if (line[x] == 'P')
-			{
-				game->players += 1;
-				game->player_x = x;
-				game->player_y = y;
-			}
-			else
-			{
-				ft_printf("AQUI NO DEBERIAMOS LLEGAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			}
+			set_character(line[x], x, y, game);
 			x++;
 		}
 		free(line);
@@ -75,12 +37,31 @@ void	set_map_array(char *map, t_game *game)
 	}
 }
 
-size_t	indx(size_t x, size_t y, size_t z, t_game *game)
+set_character(char	chr, size_t x, size_t y, t_game *game)
 {
-	size_t	indx;
-
-	indx = (x) + (y * (game->map_x)) + (z * (game->map_x * game->map_y));
-	return (indx);
+	if (chr == '1')
+		game->map_wall[x][y] = chr;
+	else if (chr == 'C')
+	{
+		game->collectibles += 1;
+		game->map_coll[x][y] = chr;
+	}
+	else if (chr == 'E')
+	{
+		game->exits += 1;
+		game->exit_x = x;
+		game->exit_y = y;
+	}
+	else if (chr == 'P')
+	{
+		game->players += 1;
+		game->player_x = x;
+		game->player_y = y;
+	}
+	else if (chr != '0')
+	{
+		ft_printf("AQUI NO DEBERIAMOS LLEGAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+	}
 }
 
 void	check_map_array(t_game *game)
@@ -97,6 +78,7 @@ void	check_map_array(t_game *game)
 		ft_exit_error("No collectibles", game);
 	else if (game->debug)
 		ft_printf("\n✅ collectibles OK\n");
+
 	check_map_boundaries(game);
 	if (game->debug)
 		ft_printf("\n✅ El mapa está cerrado\n");
@@ -130,3 +112,5 @@ void	check_map_boundaries(t_game *game)
 		y++;
 	}
 }
+
+

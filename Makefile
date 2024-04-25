@@ -6,7 +6,7 @@
 #    By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/05 16:13:08 by jarregui          #+#    #+#              #
-#    Updated: 2024/04/17 11:17:36 by jarregui         ###   ########.fr        #
+#    Updated: 2024/04/25 12:03:12 by jarregui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,16 +42,8 @@ DARK_YELLOW		=	\033[38;5;143m
 SRCS		=	main.c \
 			files/stuff.c \
 			files/map_arg_check.c \
+			files/maps_stuff.c \
 			files/map_set_game.c \
-# ft_printf.c \
-# fts_get.c \
-# fts_handling_main_txt.c \
-# fts_len.c \
-# fts_put_strs.c \
-# fts_save_nums.c \
-# fts_save_strs.c \
-# fts_str.c \
-
 
 SRCS_BONUS	=	bonus/stuff_bonus.c
 
