@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 19:53:40 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/25 14:56:18 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:34:13 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	ft_free_maps(t_game *game)
 		free_map(game->map_wall, game->map_x);
 	if (game->map_coll != NULL)
 		free_map(game->map_coll, game->map_x);
+	if (game->map_vstd != NULL)
+		free_map(game->map_vstd, game->map_x);	
 }
 
 void	ft_get_leaks(void)
@@ -47,25 +49,29 @@ void	ft_get_leaks(void)
 	ft_printf("\n");
 }
 
-void	init_game(t_game *game)
+void	init_game_struc(t_game *game)
 {
 	game->debug = 1;
-
-	game->collectibles = 0;
-	game->coll_remain = 0;
-	game->exits = 0;
-	game->players = 0;
 
 	game->map_x = 0;
 	game->map_y = 0;
 	game->map_wall = NULL;
+
 	game->map_coll = NULL;
-	
-	game->map_enem = NULL;
-	game->map_play = NULL;
+	game->collectibles = 0;
+	game->coll_remain = 0;
+
 	game->map_vstd = NULL;
+	game->visited = 0;
 
+	game->exits = 0;
+	game->exited = 0;
+	game->exit_x = 0;
+	game->exit_y = 0;
 
-
-
+	game->players = 0;
+	game->player_x = 0;
+	game->player_y = 0;
+	game->player_steps = 0;
+	game->player_score = 0;
 }

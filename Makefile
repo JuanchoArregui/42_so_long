@@ -6,7 +6,7 @@
 #    By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/05 16:13:08 by jarregui          #+#    #+#              #
-#    Updated: 2024/04/25 14:21:20 by jarregui         ###   ########.fr        #
+#    Updated: 2024/04/25 16:16:41 by jarregui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,8 @@ DARK_YELLOW		=	\033[38;5;143m
 
 SRCS		=	main.c \
 			files/map_arg_check.c \
-			files/map_set_game.c \
+			files/maps_check.c \
+			files/maps_set.c \
 			files/maps_stuff.c \
 			files/stuff.c \
 			
