@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:18:43 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/25 13:05:24 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:54:31 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,10 @@ void	check_map_full(t_game *game)
 
 	if (game->debug)
 	{
-		ft_printf("\nWALLS:\n");
+		ft_printf("\n\nWALLS:\n");
 		print_map(game->map_wall, game->map_x, game->map_y);
-		ft_printf("\nCOLLECTIBLES:\n");
-		print_map(game->map_wall, game->map_x, game->map_y);
+		ft_printf("\n\nCOLLECTIBLES:\n");
+		print_map(game->map_coll, game->map_x, game->map_y);
 	}
 }
 
@@ -103,21 +103,21 @@ void	check_map_boundaries(t_game *game)
 	y = 0;
 	while (y < game->map_y)
 	{
-		x = 0;
 		if (y == 0 || y == game->map_y -1)
 		{
+			x = 0;
 			while (x < game->map_x)
 			{
 				if (!game->map_wall[x][y])
-					ft_exit_error("El Mapa no está cerrado", game);
+					ft_exit_error("El Mapa no está cerrado *", game);
 				x++;
 			}
 		}
 		else
 		{
-			if (game->map_wall[x][y] != 1
-				|| game->map_wall[x][y] != 1)
-				ft_exit_error("El Mapa no está cerrado", game);
+			if (!game->map_wall[0][y]
+				|| !game->map_wall[game->map_x -1][y])
+				ft_exit_error("El Mapa no está cerrado **", game);
 		}
 		y++;
 	}

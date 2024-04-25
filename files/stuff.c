@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 19:53:40 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/25 14:24:17 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:56:18 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	ft_exit_error(const char *text, t_game *game)
 void	ft_free_maps(t_game *game)
 {
 	if (game->map_wall != NULL)
-		free_map(game->map_wall, game->map_y);
+		free_map(game->map_wall, game->map_x);
 	if (game->map_coll != NULL)
-		free_map(game->map_coll, game->map_y);
+		free_map(game->map_coll, game->map_x);
 }
 
 void	ft_get_leaks(void)
