@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:12:20 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/25 12:50:55 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:27:01 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,12 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		ft_exit_error("Numero de argumentos incorrecto.", &game);
 	init_game(&game);
-	check_map(argv[1], &game);
+	check_map_basic(argv[1], &game);
 	init_maps(&game);
 	set_maps(argv[1], &game);
+	check_map_full(&game);
 
-	
-
-	check_map_array(&game);
-
-	free(game.map_array);
+	ft_free_maps(&game);
 	return (0);
 }
 

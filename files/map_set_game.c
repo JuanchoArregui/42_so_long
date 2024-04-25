@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:18:43 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/25 12:25:01 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:05:24 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	set_maps(char *map, t_game *game)
 		x = 0;
 		while (x < game->map_x)
 		{
-			set_character(line[x], x, y, game);
+			set_characters(line[x], x, y, game);
 			x++;
 		}
 		free(line);
@@ -37,10 +37,12 @@ void	set_maps(char *map, t_game *game)
 	}
 }
 
-set_character(char	chr, size_t x, size_t y, t_game *game)
+void	set_characters(char chr, size_t x, size_t y, t_game *game)
 {
 	if (chr == '1')
+	{
 		game->map_wall[x][y] = chr;
+	}
 	else if (chr == 'C')
 	{
 		game->collectibles += 1;
@@ -64,7 +66,7 @@ set_character(char	chr, size_t x, size_t y, t_game *game)
 	}
 }
 
-void	check_map_array(t_game *game)
+void	check_map_full(t_game *game)
 {
 	if (game->players != 1)
 		ft_exit_error("No player or more than 1 player", game);
@@ -78,11 +80,19 @@ void	check_map_array(t_game *game)
 		ft_exit_error("No collectibles", game);
 	else if (game->debug)
 		ft_printf("\n✅ collectibles OK\n");
-
 	check_map_boundaries(game);
 	if (game->debug)
 		ft_printf("\n✅ El mapa está cerrado\n");
 
+
+
+	if (game->debug)
+	{
+		ft_printf("\nWALLS:\n");
+		print_map(game->map_wall, game->map_x, game->map_y);
+		ft_printf("\nCOLLECTIBLES:\n");
+		print_map(game->map_wall, game->map_x, game->map_y);
+	}
 }
 
 void	check_map_boundaries(t_game *game)
@@ -98,15 +108,15 @@ void	check_map_boundaries(t_game *game)
 		{
 			while (x < game->map_x)
 			{
-				if (game->map_array[indx(x, y, 0, game)] != 1)
+				if (!game->map_wall[x][y])
 					ft_exit_error("El Mapa no está cerrado", game);
 				x++;
 			}
 		}
 		else
 		{
-			if (game->map_array[indx(0, y, 0, game)] != 1
-				|| game->map_array[indx(game->map_x - 1, y, 0, game)] != 1)
+			if (game->map_wall[x][y] != 1
+				|| game->map_wall[x][y] != 1)
 				ft_exit_error("El Mapa no está cerrado", game);
 		}
 		y++;

@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:38:26 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/25 12:20:56 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:23:10 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,6 @@
 # include "get_next_line.h"
 # include "mlx.h"
 # include <stdlib.h>
-
-typedef struct s_2d_array
-{
-	int		x;
-	int		y;
-	int		**array;
-}	t_2d_array;
-
-typedef struct s_collectibles
-{
-	int		initial;
-	int		remaining;
-	int		**array;
-}	t_2d_array;
 
 typedef struct s_game
 {
@@ -57,35 +43,21 @@ typedef struct s_game
 
 
 
-
-
-
-
-
 	char		**map_enem;
 	char		**map_play;
 	char		**map_vstd;
-
-	size_t		map_z;
-	int			*map_array;
-
-	t_2d_array	map;
-	t_2d_array	coll;
-	t_2d_array	play;
-	t_2d_array	visited;
-	t_2d_array	enem;
-
 
 }	t_game;
 
 // files/stuff.c
 size_t	ft_strlen_no_n(char *s);
 void	ft_exit_error(const char *text, t_game *game);
+void	ft_free_maps(t_game *game);
 void	ft_get_leaks(void);
 void	init_game(t_game *game);
 
 // files/map_arg_check.c
-void	check_map(char *map, t_game *game);
+void	check_map_basic(char *map, t_game *game);
 void	check_map_extension(char *map, t_game *game);
 void	read_map(char *map, t_game *game);
 void	check_map_dimensions(char *map, t_game *game);
@@ -95,13 +67,13 @@ void	check_map_chars(char *map, t_game *game);
 void	init_maps(t_game *game);
 char	**init_map(t_game *game);
 void	populate_map(char **map, size_t map_x, size_t map_y);
-void	free_map(char **map, size_t map_x, size_t map_y);
+void	free_map(char **map, size_t map_y);
 void	print_map(char **map, size_t map_x, size_t map_y);
 
 // files/map_set_game.c
 void	set_maps(char *map, t_game *game);
-size_t	indx(size_t x, size_t y, size_t z, t_game *game);
-void	check_map_array(t_game *game);
+void	set_characters(char chr, size_t x, size_t y, t_game *game);
+void	check_map_full(t_game *game);
 void	check_map_boundaries(t_game *game);
 
 // # include<unistd.h>

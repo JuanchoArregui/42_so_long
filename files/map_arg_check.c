@@ -6,13 +6,13 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 19:53:40 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/25 10:52:33 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:58:03 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	check_map(char *map, t_game *game)
+void	check_map_basic(char *map, t_game *game)
 {
 	read_map(map, game);
 	check_map_extension(map, game);

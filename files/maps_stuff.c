@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_set_game.c                                     :+:      :+:    :+:   */
+/*   maps_stuff.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:18:43 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/25 11:57:29 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:23:14 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	populate_map(char **map, size_t map_x, size_t map_y)
 	}
 }
 
-void	free_map(char **map, size_t map_x, size_t map_y)
+void	free_map(char **map, size_t map_y)
 {
 	size_t	y;
 
