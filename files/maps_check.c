@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:18:43 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/26 12:16:50 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/26 14:30:43 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,8 @@
 
 void	check_map_full(t_game *game)
 {
-	if (game->debug)
-	{
-		ft_printf("\n\nWALLS:\n");
-		print_map(game->map_wall, game->map_x, game->map_y);
-		ft_printf("\n\nCOLLECTIBLES:\n");
-		print_map(game->map_coll, game->map_x, game->map_y);
-	}
-	
-	
+	print_walls(game);
+	print_colls(game);
 	if (game->players != 1)
 		ft_exit_error("No player or more than 1 player", game);
 	else if (game->debug)
@@ -40,14 +33,7 @@ void	check_map_full(t_game *game)
 			ft_printf("\n✅ collectibles OK\n");
 	}
 	check_map_boundaries(game);
-	if (game->debug)
-		ft_printf("\n✅ El mapa está cerrado\n");
 	check_map_playable(game);
-		if (game->debug)
-			ft_printf("\n✅ El mapa es jugable\n");
-
-
-	
 }
 
 void	check_map_boundaries(t_game *game)
@@ -68,51 +54,41 @@ void	check_map_boundaries(t_game *game)
 				x++;
 			}
 		}
-		else
-		{
-			if (!game->map_wall[0][y]
-				|| !game->map_wall[game->map_x -1][y])
-				ft_exit_error("El Mapa no está cerrado **", game);
-		}
+		else if (!game->map_wall[0][y] || !game->map_wall[game->map_x -1][y])
+			ft_exit_error("El Mapa no está cerrado **", game);
 		y++;
 	}
+	if (game->debug)
+		ft_printf("\n✅ Mapa bordes cerrados OK\n");
 }
 
 void	check_map_playable(t_game *game)
 {
 	size_t	x;
 	size_t	y;
-	size_t	new_visited;
 
+	print_flood(game);
 	y = 1;
-	new_visited = 0;
+	game->visited = 0;
 	while (y < (game->map_y - 1))
 	{
 		x = 1;
 		while (x < (game->map_x - 1))
-		{
-			new_visited += check_pos(x, y, game);
-			x++;
-		}
+			game->visited += check_pos(x++, y, game);
 		y++;
 	}
-
-	if (game->debug)
+	if (game->coll_remain > 0 || game->exited != 1)
 	{
-		ft_printf("\n\nVISITED ANTES DEL BUCLE:\n");
-		ft_printf("\n****new visited: %d", new_visited);
-		ft_printf("\n****coll_remain: %d", game->coll_remain);
-		ft_printf("\n****exited: %d", game->exited);
-		print_map(game->map_vstd, game->map_x, game->map_y);
+		if (game->visited > 0)
+			check_map_playable(game);
+		else if (game->exited != 1)
+			ft_exit_error("No jugable. No acceso salida", game);
+		else
+			ft_exit_error("No jugable. No acceso todos coleccionables", game);
 	}
-	if (game->coll_remain == 0 && game->exited == 1)
-		ft_printf("\n****new SALGO ANTES DE VISITAR TODO:");
-	else if (new_visited > 0 && (game->coll_remain > 0 || game->exited != 1))
-		check_map_playable(game);
-	else if (game->exited != 1)
-		ft_exit_error("No jugable. No acceso salida", game);
 	else
-		ft_exit_error("No jugable. No acceso todos coleccionables", game);
+		if (game->debug)
+			ft_printf("\n✅ El mapa es jugable\n");
 }
 
 size_t	check_pos(size_t x, size_t y, t_game *game)
@@ -120,12 +96,13 @@ size_t	check_pos(size_t x, size_t y, t_game *game)
 	size_t	new_visited;
 
 	new_visited = 0;
-	if (game->map_vstd[x][y])
+	if (game->map_vstd[x][y] == '1')
 	{
 		new_visited += check_mov(x - 1, y, game);
 		new_visited += check_mov(x + 1, y, game);
 		new_visited += check_mov(x, y - 1, game);
 		new_visited += check_mov(x, y + 1, game);
+		game->map_vstd[x][y] = '2';
 	}
 	return (new_visited);
 }
@@ -135,7 +112,7 @@ size_t	check_mov(size_t x, size_t y, t_game *game)
 	if (x > 0 && x < (game->map_x - 1) && y > 0 && y < (game->map_y - 1)
 		&& !game->map_wall[x][y] && !game->map_vstd[x][y])
 	{
-		game->map_vstd[x][y] = 'V';
+		game->map_vstd[x][y] = '1';
 		if (game->map_coll[x][y])
 		{
 			game->map_coll[x][y] = 0;

@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:18:43 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/26 12:30:39 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/26 13:10:11 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,27 +70,4 @@ void	free_map(char **map, size_t map_x)
 		x++;
 	}
 	free(map);
-}
-
-void	print_map(char **map, size_t map_x, size_t map_y)
-{
-	size_t	x;
-	size_t	y;
-
-	y = 0;
-	while (y < map_y)
-	{
-		ft_printf("\n");
-		x = 0;
-		while (x < map_x)
-		{
-			if (map[x][y])
-				ft_printf("🟧");
-			else
-				ft_printf("⬛");
-			x++;
-		}
-		y++;
-	}
-	ft_printf("\n");
 }

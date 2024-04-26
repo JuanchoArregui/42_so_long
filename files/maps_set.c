@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:18:43 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/26 12:27:22 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/26 13:58:43 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,6 @@ void	set_characters(char chr, size_t x, size_t y, t_game *game)
 		game->players += 1;
 		game->player_x = x;
 		game->player_y = y;
-		game->map_vstd[x][y] = chr;
+		game->map_vstd[x][y] = '1';
 	}
 }

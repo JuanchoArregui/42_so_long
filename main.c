@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:12:20 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/25 15:11:00 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/26 14:33:39 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,14 @@ int	main(int argc, char **argv)
 	init_maps(&game);
 	set_maps(argv[1], &game);
 	check_map_full(&game);
+	print_full_map_game(&game);
 
 	ft_free_maps(&game);
 	return (0);
 }
 
 
-
-//TODO: 
-//set_maps()  reduciir nº lineas y que cumpla norma:
-// imprimir capa bordes
-// imprimir capa collectibles
-//Mirar como checar que el mapa sea resoluble ?????
-
-
+// TODO: mirar norma y empezar con la parte gr'afica
 
 
 
