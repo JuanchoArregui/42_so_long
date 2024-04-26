@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:18:43 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/26 11:33:38 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/26 12:27:22 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,6 @@ void	set_maps(char *map, t_game *game)
 	size_t	x;
 	size_t	y;
 
-	ft_printf("\n\nMAPA WALLS ANTE DE SETEAR CARACTERES:\n");
-		print_map(game->map_wall, game->map_x, game->map_y);
-
-
-
-
-
-
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
 		ft_exit_error("Error al abrir el archivo.", game);
@@ -35,17 +27,6 @@ void	set_maps(char *map, t_game *game)
 	{
 		line = get_next_line(fd);
 		x = 0;
-
-
-		
-ft_printf("%d - linea leida: %s", y, line);
-		if (y == 7)
-		{
-			
-		}
-
-
-
 		while (x < game->map_x)
 		{
 			set_characters(line[x], x, y, game);
@@ -58,13 +39,6 @@ ft_printf("%d - linea leida: %s", y, line);
 
 void	set_characters(char chr, size_t x, size_t y, t_game *game)
 {
-	if (y == 7)
-	{
-		ft_printf("\n     ****** x, y, char: %d, %d, %c", x, y, chr);
-	}
-	
-	
-	
 	if (chr == '1')
 	{
 		game->map_wall[x][y] = chr;
