@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:18:43 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/26 10:42:56 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/26 12:16:50 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,22 +84,8 @@ void	check_map_playable(t_game *game)
 	size_t	y;
 	size_t	new_visited;
 
-	
-	
 	y = 1;
 	new_visited = 0;
-
-
-	if (game->debug)
-	{
-		ft_printf("\n\nVISITED ANTES DE ENTRAR:\n");
-		ft_printf("\n****new visited: %d", new_visited);
-		ft_printf("\n****coll_remain: %d", game->coll_remain);
-		ft_printf("\n****exited: %d", game->exited);
-		print_map(game->map_vstd, game->map_x, game->map_y);
-	}
-
-	
 	while (y < (game->map_y - 1))
 	{
 		x = 1;
@@ -119,10 +105,14 @@ void	check_map_playable(t_game *game)
 		ft_printf("\n****exited: %d", game->exited);
 		print_map(game->map_vstd, game->map_x, game->map_y);
 	}
-	if (new_visited > 0 && (game->coll_remain > 0 || game->exited != 1))
+	if (game->coll_remain == 0 && game->exited == 1)
+		ft_printf("\n****new SALGO ANTES DE VISITAR TODO:");
+	else if (new_visited > 0 && (game->coll_remain > 0 || game->exited != 1))
 		check_map_playable(game);
-	else if (game->coll_remain > 0 || game->exited != 1)
-		ft_exit_error("El Mapa no es jugable", game);
+	else if (game->exited != 1)
+		ft_exit_error("No jugable. No acceso salida", game);
+	else
+		ft_exit_error("No jugable. No acceso todos coleccionables", game);
 }
 
 size_t	check_pos(size_t x, size_t y, t_game *game)

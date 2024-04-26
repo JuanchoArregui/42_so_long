@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:18:43 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/26 10:01:21 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/26 11:54:24 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ void	init_maps(t_game *game)
 	game->map_vstd = init_map(game);
 	if (game->debug)
 		ft_printf("\n✅ Array Maps inicializados.\n");
+
+		ft_printf("\n\nMAPA map_wall despues de setearlo y ponerlo a 0:\n");
+		print_map(game->map_wall, game->map_x, game->map_y);
+		ft_printf("\n\nMAPA map_coll despues de setearlo y ponerlo a 0:\n");
+		print_map(game->map_coll, game->map_x, game->map_y);
+		ft_printf("\n\nMAPA map_vstd despues de setearlo y ponerlo a 0:\n");
+		print_map(game->map_vstd, game->map_x, game->map_y);
 }
 
 char	**init_map(t_game *game)
@@ -46,16 +53,16 @@ void	populate_map(char **map, size_t map_x, size_t map_y)
 	size_t	x;
 	size_t	y;
 
-	x = 0;
 	y = 0;
-	while (x < map_x)
+	while (y < map_y)
 	{
-		while (y < map_y)
+		x = 0;
+		while (x < map_x)
 		{
 			map[x][y] = 0;
-			y++;
+			x++;
 		}
-		x++;
+		y++;
 	}
 }
 
