@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:18:43 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/25 14:49:13 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/04/26 10:01:21 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ void	init_maps(t_game *game)
 {
 	game->map_wall = init_map(game);
 	game->map_coll = init_map(game);
+	game->map_vstd = init_map(game);
+	if (game->debug)
+		ft_printf("\n✅ Array Maps inicializados.\n");
 }
 
 char	**init_map(t_game *game)
