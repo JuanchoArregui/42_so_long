@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:12:20 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/26 14:33:39 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/16 10:25:12 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 int	main(int argc, char **argv)
 {
 	t_game	game;
+	void	*img;
+	void	*mlx;
 
 	//BORRAR ESTO ANTES DE ENTREGARRRRRR!!!
 	atexit(ft_get_leaks);
@@ -29,6 +31,13 @@ int	main(int argc, char **argv)
 	set_maps(argv[1], &game);
 	check_map_full(&game);
 	print_full_map_game(&game);
+
+	
+
+	mlx = mlx_init();
+	img = mlx_new_image(mlx, 1920, 1080);
+	mlx_loop(mlx);
+	ft_printf("%p", img);
 
 	ft_free_maps(&game);
 	return (0);

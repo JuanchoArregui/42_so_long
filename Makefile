@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+         #
+#    By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/05 16:13:08 by jarregui          #+#    #+#              #
-#    Updated: 2024/04/26 13:09:40 by jarregui         ###   ########.fr        #
+#    Updated: 2024/05/16 11:24:23 by jarregui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,11 +32,11 @@ DARK_GREEN		=	\033[38;2;75;179;82m
 DARK_YELLOW		=	\033[38;5;143m
 
 # REQUIRED HEADERS for LInux or Mac
-# ifeq ($(shell uname), Linux)
-# 	INCLUDES = -I/usr/include -Imlx
-# else
-# 	INCLUDES = -I/opt/X11/include -Imlx
-# endif
+ifeq ($(shell uname), Linux)
+	INCLUDES = -I/usr/include -Imlx
+else
+	INCLUDES = -I/opt/X11/include -Imlx
+endif
 
 SRCS		=	main.c \
 			files/map_arg_check.c \
@@ -60,10 +60,10 @@ CFLAGS			=	-Wall -Wextra -Werror
 
 # MinilibX directory, macro and flags for LInux or Mac
 ifeq ($(shell uname), Linux)
-	MLX_DIR = mlx_linux
+	MLX_DIR = libs/minilib/minilibx_linux
 	CFLAGS +=  -Wno-unused-result
 else
-	MLX_DIR = mlx
+	MLX_DIR = libs/minilib/minilibx_opengl
 endif
 
 MLX_FLAGS		=	-L$(MLX_DIR) -lmlx
@@ -119,7 +119,7 @@ subsystems:
 	@echo "${ORANGE}So_long compilation: $(DEF_COLOR)"
 
 ${NAME}:	${OBJS}
-	@$(CC) ${CFLAGS} $(INCLUDE_FLAGS) $(MLX_FLAGS) ${OBJS} ${LIBS} -o $(NAME)
+	@$(CC) ${CFLAGS} $(INCLUDE_FLAGS) $(MLX_FLAGS) ${OBJS} ${LIBS} $(MLX_FLAGS) -o $(NAME)
 	@echo "$(GREEN)✓ Created ${NAME}$(DEF_COLOR)\n"
 
 install_mlx:
