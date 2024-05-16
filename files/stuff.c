@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 19:53:40 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/16 15:22:30 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/16 23:47:03 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,49 @@ void	ft_exit_error(const char *text, t_game *game)
 		ft_printf("\n❌ %s\n\n", text);
 	else
 		write(2, "Error\n", 6);
-	ft_free_maps(game);
+	ft_free_game(game);
 	exit(0);
 }
 
-void	ft_free_maps(t_game *game)
+void	ft_free_game(t_game *game)
 {
+ft_printf("\n\n\n---> LIBERADO ft_free_game. CHECK map_x: %d", game->map_x);
+	
+	
 	if (game->map_wall != NULL)
+	{
+
 		free_map(game->map_wall, game->map_x);
+ft_printf("\nLIBERADO MAPA map_wall");
+	}
+
 	if (game->map_coll != NULL)
+	{
+
 		free_map(game->map_coll, game->map_x);
+ft_printf("\nLIBERADO MAPA map_coll");
+	}
+
 	if (game->map_vstd != NULL)
-		free_map(game->map_vstd, game->map_x);	
+	{
+
+		free_map(game->map_vstd, game->map_x);
+ft_printf("\nLIBERADO MAPA map_vstd");
+	}
+
+	if (game->win && game->mlx)
+	{
+		mlx_destroy_window(game->mlx, game->win);
+ft_printf("\nLIBERADO WIN");
+	}
+
+	if (game->mlx)
+	{
+
+		mlx_destroy_display(game->mlx);
+ft_printf("\nLIBERADO MLX");
+	}
+
 }
 
 void	ft_get_leaks(void)
@@ -52,6 +83,14 @@ void	ft_get_leaks(void)
 void	init_game_struc(t_game *game)
 {
 	game->debug = 1;
+
+	game->mlx = NULL;
+	game->tile_dim = 128;
+	game->win_width = 0;
+	game->win_height = 0;
+	game->win = NULL;
+	game->imgs.door_open = NULL;
+	game->imgs.door_close = NULL;
 
 	game->map_x = 0;
 	game->map_y = 0;
@@ -75,5 +114,4 @@ void	init_game_struc(t_game *game)
 	game->player_steps = 0;
 	game->player_score = 0;
 
-	game->tile_dim = 32;
 }

@@ -6,7 +6,7 @@
 #    By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/05 16:13:08 by jarregui          #+#    #+#              #
-#    Updated: 2024/05/16 15:24:46 by jarregui         ###   ########.fr        #
+#    Updated: 2024/05/16 21:52:57 by jarregui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ CC				=	gcc
 RM				=	rm -f
 AR				=	ar rc
 RN				=	ranlib
-# CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address
+# CFLAGS			=	-g -Wall -Wextra -Werror -fsanitize=address
 CFLAGS			=	-Wall -Wextra -Werror
 
 # MinilibX directory, macro and flags for LInux or Mac

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   maps_set.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:18:43 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/26 13:58:43 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/16 21:39:41 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ void	set_characters(char chr, size_t x, size_t y, t_game *game)
 	}
 	else if (chr == 'P')
 	{
+		ft_printf("\n HAY UN PLAYER P");
+		
+		
 		game->players += 1;
 		game->player_x = x;
 		game->player_y = y;
