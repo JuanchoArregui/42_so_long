@@ -6,17 +6,31 @@
 /*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:12:20 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/16 10:25:12 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/16 12:58:35 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+int on_destroy(t_game *game)
+{
+	mlx_destroy_window(game->mlx, game->win);
+	mlx_destroy_display(game->mlx);
+	free(game->mlx);
+	exit(0);
+	return (0);
+}
+
+int on_keypress(int keysym, t_game *game)
+{
+	(void)game;
+	ft_printf("Pressed key: %d\\n", keysym);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_game	game;
-	void	*img;
-	void	*mlx;
 
 	//BORRAR ESTO ANTES DE ENTREGARRRRRR!!!
 	atexit(ft_get_leaks);
@@ -30,14 +44,30 @@ int	main(int argc, char **argv)
 	init_maps(&game);
 	set_maps(argv[1], &game);
 	check_map_full(&game);
-	print_full_map_game(&game);
+	
 
 	
 
-	mlx = mlx_init();
-	img = mlx_new_image(mlx, 1920, 1080);
-	mlx_loop(mlx);
-	ft_printf("%p", img);
+	game.mlx = mlx_init();
+	if (!game.mlx)
+		return (1);
+	game.win = mlx_new_window(game.mlx, 600, 400, "hi :)");
+	if (!game.win)
+		return (free(game.mlx), 1);
+	// Register key release hook
+	mlx_hook(game.win, KeyRelease, KeyReleaseMask, &on_keypress, &game);
+ 
+	// Register destroy hook
+	mlx_hook(game.win, DestroyNotify, StructureNotifyMask, &on_destroy, &game);
+ 
+	// Loop over the MLX pointer
+	mlx_loop(game.mlx);
+
+
+
+
+
+
 
 	ft_free_maps(&game);
 	return (0);
@@ -61,18 +91,19 @@ int	main(int argc, char **argv)
 
 	
 
-// 	// mlx_ptr = mlx_init();
-// 	// if (!mlx_ptr)
+// 	// mlx = mlx_init();
+// 	// if (!mlx)
 // 	// 	return (1);
-// 	// win_ptr = mlx_new_window(mlx_ptr, 600, 400, "hi :)");
-// 	// if (!win_ptr)
-// 	// 	return (free(mlx_ptr), 1);
-// 	// mlx_destroy_window(mlx_ptr, win_ptr);
-// 	// mlx_destroy_display(mlx_ptr);
-// 	// free(mlx_ptr);
+// 	// win = mlx_new_window(mlx, 600, 400, "hi :)");
+// 	// if (!win)
+// 	// 	return (free(mlx), 1);
+// 	// mlx_destroy_window(mlx, win);
+// 	// mlx_destroy_display(mlx);
+// 	// free(mlx);
 // 	return (0);
 // }
 
 // minilibs guide: https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html
+// https://reactive.so/post/42-a-comprehensive-guide-to-so_long
 
 //project with pacman: https://github.com/madebypixel02/so_long

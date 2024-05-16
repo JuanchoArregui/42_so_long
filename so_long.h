@@ -3,25 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:38:26 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/26 14:29:18 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/16 14:06:19 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
+# include "get_next_line.h"
 # include "libft.h"
 # include "printf.h"
-# include "get_next_line.h"
 # include "mlx.h"
 # include <stdlib.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 
 typedef struct s_game
 {
 	int			debug;
+
+	void		*mlx;
+	void		*win;
 
 	size_t		map_x;
 	size_t		map_y;
@@ -46,6 +51,11 @@ typedef struct s_game
 	size_t		player_score;
 
 }	t_game;
+
+// main.c
+int on_destroy(t_game *game);
+int on_keypress(int keysym, t_game *game);
+
 
 // files/stuff.c
 size_t	ft_strlen_no_n(char *s);
