@@ -6,7 +6,7 @@
 #    By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/05 16:13:08 by jarregui          #+#    #+#              #
-#    Updated: 2024/05/16 11:24:23 by jarregui         ###   ########.fr        #
+#    Updated: 2024/05/16 15:24:46 by jarregui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ else
 endif
 
 SRCS		=	main.c \
+			files/images.c \
 			files/map_arg_check.c \
 			files/maps_check.c \
 			files/maps_print.c \

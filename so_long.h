@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:38:26 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/16 14:06:19 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:32:01 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,20 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 
+typedef struct s_imgs
+{
+	void			*door_open;
+	void			*door_close;
+}	t_imgs;
+
 typedef struct s_game
 {
 	int			debug;
 
 	void		*mlx;
 	void		*win;
+	t_imgs		imgs;
+	int			tile_dim;
 
 	size_t		map_x;
 	size_t		map_y;
@@ -52,9 +60,13 @@ typedef struct s_game
 
 }	t_game;
 
+
 // main.c
 int on_destroy(t_game *game);
 int on_keypress(int keysym, t_game *game);
+
+// files/images.c
+void		open_images(t_game *game);
 
 
 // files/stuff.c
