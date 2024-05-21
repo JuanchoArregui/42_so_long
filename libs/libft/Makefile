@@ -6,7 +6,7 @@
 #    By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/25 15:39:13 by jarregui          #+#    #+#              #
-#    Updated: 2024/04/03 14:04:44 by jarregui         ###   ########.fr        #
+#    Updated: 2024/05/21 09:57:42 by jarregui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@
 #		target: prerequisites
 #		<TAB> recipe
 
+# INCLUDE COLOR VARIABLES DECLARATION:
+include ../colors.mk
 
 # VARIABLES DECLARATION:
 CC		=	gcc

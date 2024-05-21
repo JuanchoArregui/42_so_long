@@ -6,9 +6,12 @@
 #    By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/18 13:58:00 by jarregui          #+#    #+#              #
-#    Updated: 2024/04/03 14:12:26 by jarregui         ###   ########.fr        #
+#    Updated: 2024/05/21 09:57:54 by jarregui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+# INCLUDE COLOR VARIABLES DECLARATION:
+include ../colors.mk
 
 NAME		=	printf.a
 
