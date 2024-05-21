@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:12:20 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/16 23:51:14 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/21 10:03:39 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 //mirar si puede ser por usar size_t en vez de int
 //repasar asignación de valores
 //al liberar los mapas (map_x llega mal) y también me da SIGSEGV 
+
+//KKKK
 
 int on_destroy(t_game *game)
 {
