@@ -6,15 +6,15 @@
 /*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 19:53:40 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/16 23:47:03 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/29 11:07:26 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-size_t	ft_strlen_no_n(char *s)
+int	ft_strlen_no_n(char *s)
 {
-	size_t	length;
+	int	length;
 
 	length = ft_strlen(s);
 	if (length && s[length - 1] == '\n')
@@ -85,7 +85,7 @@ void	init_game_struc(t_game *game)
 	game->debug = 1;
 
 	game->mlx = NULL;
-	game->tile_dim = 128;
+	game->tile_dim = 64;
 	game->win_width = 0;
 	game->win_height = 0;
 	game->win = NULL;

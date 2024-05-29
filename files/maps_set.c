@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:18:43 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/16 21:39:41 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/29 11:09:46 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	set_maps(char *map, t_game *game)
 {
 	int		fd;
 	char	*line;
-	size_t	x;
-	size_t	y;
+	int	x;
+	int	y;
 
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
@@ -37,7 +37,7 @@ void	set_maps(char *map, t_game *game)
 	}
 }
 
-void	set_characters(char chr, size_t x, size_t y, t_game *game)
+void	set_characters(char chr, int x, int y, t_game *game)
 {
 	if (chr == '1')
 	{

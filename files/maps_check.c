@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   maps_check.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:18:43 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/26 14:30:43 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/29 11:09:15 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	check_map_full(t_game *game)
 
 void	check_map_boundaries(t_game *game)
 {
-	size_t	x;
-	size_t	y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (y < game->map_y)
@@ -64,8 +64,8 @@ void	check_map_boundaries(t_game *game)
 
 void	check_map_playable(t_game *game)
 {
-	size_t	x;
-	size_t	y;
+	int	x;
+	int	y;
 
 	print_flood(game);
 	y = 1;
@@ -91,9 +91,9 @@ void	check_map_playable(t_game *game)
 			ft_printf("\n✅ El mapa es jugable\n");
 }
 
-size_t	check_pos(size_t x, size_t y, t_game *game)
+int	check_pos(int x, int y, t_game *game)
 {
-	size_t	new_visited;
+	int	new_visited;
 
 	new_visited = 0;
 	if (game->map_vstd[x][y] == '1')
@@ -107,7 +107,7 @@ size_t	check_pos(size_t x, size_t y, t_game *game)
 	return (new_visited);
 }
 
-size_t	check_mov(size_t x, size_t y, t_game *game)
+int	check_mov(int x, int y, t_game *game)
 {
 	if (x > 0 && x < (game->map_x - 1) && y > 0 && y < (game->map_y - 1)
 		&& !game->map_wall[x][y] && !game->map_vstd[x][y])

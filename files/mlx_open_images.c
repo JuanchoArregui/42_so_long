@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   images.c                                           :+:      :+:    :+:   */
+/*   mlx_open_images.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:57:23 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/16 15:21:58 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/29 10:31:52 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,26 @@ static void	open_door_imgs(t_game *game)
 	game->imgs.door_open = mlx_xpm_file_to_image(game->mlx,
 			"sprites/door_01.xpm",
 			&game->tile_dim, &game->tile_dim);
+	if (!game->imgs.door_open)
+        ft_exit_error("Error al cargar la imagen door_open", game);
 	game->imgs.door_close = mlx_xpm_file_to_image(game->mlx,
 			"sprites/door_02.xpm",
 			&game->tile_dim, &game->tile_dim);
+	if (!game->imgs.door_close)
+        ft_exit_error("Error al cargar la imagen door_close", game);
+}
+
+static void	open_wall_imgs(t_game *game)
+{
+	game->imgs.wall = mlx_xpm_file_to_image(game->mlx,
+			"sprites/wall.xpm",
+			&game->tile_dim, &game->tile_dim);
+	if (!game->imgs.wall)
+        ft_exit_error("Error al cargar la imagen de la pared", game);
 }
 
 /* Opens with the mlx all images needed in the game */
-void	open_images(t_game *game)
+void	load_images(t_game *game)
 {
 	// open_wallimgs_up (game);
 	// open_wallimgs_down (game);
@@ -49,4 +62,5 @@ void	open_images(t_game *game)
 	// open_collect_imgs(game);
 	// open_enemy_imgs(game);
 	open_door_imgs(game);
+	open_wall_imgs(game);
 }

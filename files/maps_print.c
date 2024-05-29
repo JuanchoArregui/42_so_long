@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   maps_print.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:18:43 by jarregui          #+#    #+#             */
-/*   Updated: 2024/04/26 14:32:39 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/29 11:09:30 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	print_walls(t_game *game)
 {
-	size_t	x;
-	size_t	y;
+	int	x;
+	int	y;
 
 	if (game->debug)
 	{
@@ -41,8 +41,8 @@ void	print_walls(t_game *game)
 
 void	print_colls(t_game *game)
 {
-	size_t	x;
-	size_t	y;
+	int	x;
+	int	y;
 
 	if (game->debug)
 	{
@@ -68,8 +68,8 @@ void	print_colls(t_game *game)
 
 void	print_flood(t_game *game)
 {
-	size_t	x;
-	size_t	y;
+	int	x;
+	int	y;
 
 	if (game->debug)
 	{
@@ -96,8 +96,8 @@ void	print_flood(t_game *game)
 
 void	print_full_map_game(t_game *game)
 {
-	size_t	x;
-	size_t	y;
+	int	x;
+	int	y;
 
 	if (game->debug)
 	{

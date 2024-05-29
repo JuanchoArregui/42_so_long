@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 19:53:40 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/16 20:57:54 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/29 11:08:04 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	check_map_basic(char *map, t_game *game)
 		ft_printf("\n✅ Map dim. OK: %d x %d\n", game->map_x, game->map_y);
 	check_map_chars(map, game);
 
-		// ft_printf("\n✅ 22222222222222222 Map dim. OK: %d x %d\n", game->map_x, game->map_y);
+		ft_printf("\nMIRAR AQUIIIIIIIIII despues de check_map_chars Map dim. OK: %d x %d\n", game->map_x, game->map_y);
 
 
 
@@ -100,7 +100,7 @@ void	check_map_chars(char *map, t_game *game)
 {
 	int		fd;
 	char	*line;
-	size_t	len;
+	int		len;
 
 	fd = open(map, O_RDONLY);
 	if (fd < 0)

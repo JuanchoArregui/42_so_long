@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:12:20 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/21 10:03:39 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/29 11:13:00 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 //TODO:
-// revisar map_x y map_y que veo que no mantienen el valo. Qué passa???
+// revisar map_x y map_y que veo que no mantienen el valor. Qué passa???
 //mirar si puede ser por usar size_t en vez de int
 //repasar asignación de valores
 //al liberar los mapas (map_x llega mal) y también me da SIGSEGV 
@@ -100,6 +100,15 @@ void start_game(t_game *game)
 
 	ft_printf("\ncreada ventana win");
 
+	// Cargar las imágenes
+    load_images(game);
+
+    // Dibujar el mapa
+    draw_map(game);
+
+
+	
+
 	// Register key press hook
 	mlx_hook(game->win, KeyPress, KeyPressMask, &on_keypress, &game);
  
@@ -132,7 +141,7 @@ int	main(int argc, char **argv)
 
 	ft_printf("\n00000000");
 	ft_printf("\ngame->map_x: %d", game.map_x);
-	ft_printf("\ngame.map_y: %d", game.map_y);
+	ft_printf("\ngame->map_y: %d", game.map_y);
 	ft_printf("\ngame.players: %d", game.players);
 
 
