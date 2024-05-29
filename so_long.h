@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:38:26 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/29 11:06:25 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/29 16:47:09 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,12 @@
 
 typedef struct s_imgs
 {
+	void		*wall;
+	void		*coll;
+	void		*player;
 	void		*door_open;
 	void		*door_close;
-	void		*wall;
+	void		*background;
 }	t_imgs;
 
 typedef struct s_game
@@ -42,7 +45,7 @@ typedef struct s_game
 	void		*mlx;
 	int			tile_dim;
 	int			win_width;
-    int 		win_height;
+	int 		win_height;
 	void		*win;
 	t_imgs		imgs;
 
@@ -73,7 +76,7 @@ typedef struct s_game
 
 // main.c
 int		on_destroy(t_game *game);
-int		on_keypress(int keysym, t_game *game);
+int		on_keypress(int key_pressed, t_game *game);
 
 
 
@@ -112,8 +115,12 @@ void	print_full_map_game(t_game *game);
 // Note: auxiliary functions marked as static, so no need to include the here
 void	load_images(t_game *game);
 
-// files/mlx_draw_map.c
-void	draw_map(t_game *game);
+// files/mlx_draw_game.c
+void	draw_background_map(t_game *game);
+void	draw_player(t_game *game);
+void	draw_colectibles(t_game *game);
+void	draw_door(t_game *game);
+void	draw_game(t_game *game);
 
 // files/stuff.c
 int		ft_strlen_no_n(char *s);
@@ -123,3 +130,4 @@ void	ft_get_leaks(void);
 void	init_game_struc(t_game *game);
 
 #endif
+

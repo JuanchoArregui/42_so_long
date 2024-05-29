@@ -6,7 +6,7 @@
 #    By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/05 16:13:08 by jarregui          #+#    #+#              #
-#    Updated: 2024/05/29 10:24:38 by jarregui         ###   ########.fr        #
+#    Updated: 2024/05/29 16:16:00 by jarregui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRCS		=	main.c \
 			files/maps_print.c \
 			files/maps_set.c \
 			files/maps_stuff.c \
-			files/mlx_draw_map.c \
+			files/mlx_draw_game.c \
 			files/mlx_open_images.c \
 			files/stuff.c \
 			

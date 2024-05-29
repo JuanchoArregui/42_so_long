@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:12:20 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/29 11:13:00 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/29 16:47:31 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,23 @@ int on_destroy(t_game *game)
 	return (0);
 }
 
+int move_up(t_game *game)
+{
+	if (!game->map_wall[game->player_x][game->player_y + 1])
+	{
+		game->player_y += 1;
+		if (game->map_coll[game->player_x][game->player_y])
+		{
+			game->map_coll[game->player_x][game->player_y] = 0;
+			game->coll_remain -= 1;
+			//aqui checar si coll_remain == 0 y si es así abrir la puerta!
+		}
+		//Aqui poner el codigo o función para que imprima esa tile o el mapa entero
+		return (1);
+	}
+	return (0);
+}
+
 int on_keypress(int key_pressed, t_game *game)
 {
 	(void)game;
@@ -42,6 +59,7 @@ int on_keypress(int key_pressed, t_game *game)
 	else if (key_pressed == KEY_W)
 	{
 		ft_printf("\nUP");
+		move_up(game);
 		// 	moved = move_to(game, game->player.tile->up);
 	}
 	else if (key_pressed == KEY_S)
@@ -101,10 +119,10 @@ void start_game(t_game *game)
 	ft_printf("\ncreada ventana win");
 
 	// Cargar las imágenes
-    load_images(game);
+	load_images(game);
 
-    // Dibujar el mapa
-    draw_map(game);
+	// Dibujar el mapa, personaje y coleccionables
+	draw_game(game);
 
 
 	
