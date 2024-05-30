@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:38:26 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/30 10:18:16 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/30 13:54:23 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,13 @@ typedef struct s_game
 	int			win_width;
 	int			win_height;
 	void		*win;
+	
 	t_imgs		imgs;
 
 	int			map_x;
 	int			map_y;
+	char		**map_raw;
 	char		**map_wall;
-
 	char		**map_coll;
 	int			collectibles;
 	int			coll_remain;
@@ -71,8 +72,8 @@ typedef struct s_game
 	int			player_steps;
 	int			player_score;
 
-	int			aux_x;
-	int			aux_y;
+	int			x;
+	int			y;
 
 }	t_game;
 
@@ -120,17 +121,19 @@ void	load_images(t_game *game);
 void	create_and_load_background(t_game *game);
 
 // files/mlx_draw_game.c
-void	draw_background_map(t_game *game);
-void	draw_player(t_game *game);
-void	draw_colectibles(t_game *game);
-void	draw_door(t_game *game);
+void	draw_tile(t_game *game, void *img, int x, int y);
 void	draw_game(t_game *game);
 
-// files/stuff.c
+// files/game_init_strucs.c
+void	init_game_strucs(t_game *game);
+
+// files/game_stuff.c
 int		ft_strlen_no_n(char *s);
 void	ft_exit_error(const char *text, t_game *game);
 void	ft_free_game(t_game *game);
 void	ft_get_leaks(void);
-void	init_game_struc(t_game *game);
+void	reset_collectibles(t_game *game);
+
+
 
 #endif

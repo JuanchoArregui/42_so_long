@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_load_background.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:57:23 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/30 10:24:32 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/30 12:13:05 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
 void create_and_load_background(t_game *game) {
-	ft_printf("\naux_x: %d, aux_y: %d", game->aux_x, game->aux_y);
+	ft_printf("\nx: %d, y: %d", game->x, game->y);
 	// int		x;
 	// int		y;
 	// char	*background_data;

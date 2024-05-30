@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+         #
+#    By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/05 16:13:08 by jarregui          #+#    #+#              #
-#    Updated: 2024/05/30 10:28:23 by jarregui         ###   ########.fr        #
+#    Updated: 2024/05/30 11:24:29 by jarregui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ SRCS_BONUS	=	bonus/stuff_bonus.c
 PROY_NAME		=	SO_LONG
 NAME			=	so_long
 BONUS_NAME		=	so_long_bonus
-CC				=	gcc
+CC				=	gcc -g # QUITAR el -g para entregarrrr
 RM				=	rm -f
 AR				=	ar rc
 RN				=	ranlib

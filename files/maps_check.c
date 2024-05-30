@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:18:43 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/29 11:09:15 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/30 14:58:28 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	check_map_full(t_game *game)
 	print_walls(game);
 	print_colls(game);
 	if (game->players != 1)
-		ft_exit_error("No player or more than 1 player", game);
+		ft_exit_error(ft_strjoin("Num jugadores incorrecto: ",
+			ft_itoa(game->players)), game);
 	else if (game->debug)
 		ft_printf("\n✅ 1 player set\n");
 	if (game->exits != 1)
@@ -33,6 +34,7 @@ void	check_map_full(t_game *game)
 			ft_printf("\n✅ collectibles OK\n");
 	}
 	check_map_boundaries(game);
+	print_flood(game);
 	check_map_playable(game);
 }
 
@@ -67,7 +69,6 @@ void	check_map_playable(t_game *game)
 	int	x;
 	int	y;
 
-	print_flood(game);
 	y = 1;
 	game->visited = 0;
 	while (y < (game->map_y - 1))
@@ -77,6 +78,7 @@ void	check_map_playable(t_game *game)
 			game->visited += check_pos(x++, y, game);
 		y++;
 	}
+	print_flood(game);
 	if (game->coll_remain > 0 || game->exited != 1)
 	{
 		if (game->visited > 0)

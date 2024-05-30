@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:18:43 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/29 11:09:46 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/30 13:53:21 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,15 @@ void	set_maps(char *map, t_game *game)
 
 void	set_characters(char chr, int x, int y, t_game *game)
 {
+	game->map_raw[x][y] = chr;
 	if (chr == '1')
 	{
-		game->map_wall[x][y] = chr;
+		game->map_wall[x][y] = 1;
 	}
 	else if (chr == 'C')
 	{
 		game->collectibles += 1;
-		game->map_coll[x][y] = chr;
+		game->map_coll[x][y] = 1;
 	}
 	else if (chr == 'E')
 	{
@@ -56,9 +57,6 @@ void	set_characters(char chr, int x, int y, t_game *game)
 	}
 	else if (chr == 'P')
 	{
-		ft_printf("\n HAY UN PLAYER P");
-		
-		
 		game->players += 1;
 		game->player_x = x;
 		game->player_y = y;

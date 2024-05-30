@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:12:20 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/29 16:47:31 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:05:06 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,9 @@ int on_keypress(int key_pressed, t_game *game)
 
 void start_game(t_game *game)
 {
+	reset_collectibles(game);
 	game->win_width = game->tile_dim * game->map_x;
-    game->win_height = game->tile_dim * game->map_y;
+	game->win_height = game->tile_dim * game->map_y;
 
 	ft_printf("\n55555");
 	ft_printf("\ngame->map_x: %d", game->map_x);
@@ -153,7 +154,7 @@ int	main(int argc, char **argv)
 		ft_exit_error("Falta el nombre archivo del mapa a jugar.", &game);
 	if (argc != 2)
 		ft_exit_error("Numero de argumentos incorrecto.", &game);
-	init_game_struc(&game);
+	init_game_strucs(&game);
 
 	 printf("Game structure initialized.\n");
 

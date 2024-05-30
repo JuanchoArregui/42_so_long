@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:18:43 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/29 11:14:38 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/30 13:58:27 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	init_maps(t_game *game)
 {
+	game->map_raw = init_map(game);
 	printf("Initializing maps...\n");
 	ft_printf("\nDENTRO DE INIT MAPS");
 	ft_printf("\ngame.map_x: %d", game->map_x);
@@ -30,6 +31,7 @@ void	init_maps(t_game *game)
 	ft_printf("\nDENTRO DE INIT MAPS---> despues de MAP VSTD");
 	ft_printf("\ngame->map_x: %d", game->map_x);
 	ft_printf("\ngame->map_y: %d", game->map_y);
+
 
 	if (!game->map_wall || !game->map_coll || !game->map_vstd) {
         ft_exit_error("Error: fallo en la asignación de memoria para los mapas.", game);
