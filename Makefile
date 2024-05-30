@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+         #
+#    By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/05 16:13:08 by jarregui          #+#    #+#              #
-#    Updated: 2024/05/29 16:16:00 by jarregui         ###   ########.fr        #
+#    Updated: 2024/05/30 10:28:23 by jarregui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,14 +21,16 @@ else
 endif
 
 SRCS		=	main.c \
+			files/game_init_strucs.c \
+			files/game_stuff.c \
 			files/map_arg_check.c \
 			files/maps_check.c \
 			files/maps_print.c \
 			files/maps_set.c \
 			files/maps_stuff.c \
 			files/mlx_draw_game.c \
-			files/mlx_open_images.c \
-			files/stuff.c \
+			files/mlx_load_images.c \
+			files/mlx_load_background.c \
 			
 SRCS_BONUS	=	bonus/stuff_bonus.c
 
