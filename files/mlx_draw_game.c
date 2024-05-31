@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 10:49:13 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/31 17:09:25 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/31 18:03:42 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,29 +52,14 @@ void	draw_tile(t_game *game, void *img_ptr, int x, int y)
 		x * game->tile_dim, y * game->tile_dim);
 }
 
-void draw_game(t_game *game) {
-	// draw_background_map(game);
-	ft_printf("\nDRAW GAME");
-	ft_printf("\ngame->coll_remain: %d", game->coll_remain);
-	
+void	draw_game(t_game *game)
+{
 	draw_map_wall(game);
 	if (game->coll_remain > 0)
 		draw_map_coll(game);
-
-
-	ft_printf("\n\ndraw_game game->coll_remain: %d", game->coll_remain);
-
 	if (game->coll_remain == 0)
-	{
-		ft_printf("\ndraw_game ABIERTA ");
-
 		draw_tile(game, game->imgs.door_open, game->exit_x, game->exit_y);
-	}
 	else
 		draw_tile(game, game->imgs.door_close, game->exit_x, game->exit_y);
-		
 	draw_tile(game, game->imgs.player, game->player_x, game->player_y);
-
-
-	ft_printf("\n\nDRAW GAME terminado. check map_y: %d", game->map_y);
 }

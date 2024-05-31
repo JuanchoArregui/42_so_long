@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:18:43 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/31 12:57:14 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/31 17:55:25 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,12 @@ void	set_maps(char *map, t_game *game)
 	if (fd < 0)
 		ft_exit_error("Error al abrir el archivo.", game);
 	y = 0;
-
-			ft_printf("\nSETEANDO MAPA map[%d][%d], %p)", game->map_y, game->map_x, game);
-
 	while (y < game->map_y)
 	{
 		line = get_next_line(fd);
 		x = 0;
-			ft_printf("\nLINE: %s", line);
-
 		while (x < game->map_x)
 		{
-			ft_printf("\nset_characters(%c, map[%d][%d])", line[x], y, x);
-			
 			set_characters(line[x], y, x, game);
 			x++;
 		}

@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:18:43 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/31 13:19:03 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/31 18:00:10 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	check_map_full(t_game *game)
 	print_colls(game);
 	if (game->players != 1)
 		ft_exit_error(ft_strjoin("Num jugadores incorrecto: ",
-			ft_itoa(game->players)), game);
+				ft_itoa(game->players)), game);
 	else if (game->debug)
 		ft_printf("\n✅ 1 player set\n");
 	if (game->exits != 1)
