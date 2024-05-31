@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   maps_set.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:18:43 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/30 13:53:21 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/31 12:57:14 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,27 @@ void	set_maps(char *map, t_game *game)
 {
 	int		fd;
 	char	*line;
-	int	x;
-	int	y;
+	int		y;
+	int		x;
 
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
 		ft_exit_error("Error al abrir el archivo.", game);
 	y = 0;
+
+			ft_printf("\nSETEANDO MAPA map[%d][%d], %p)", game->map_y, game->map_x, game);
+
 	while (y < game->map_y)
 	{
 		line = get_next_line(fd);
 		x = 0;
+			ft_printf("\nLINE: %s", line);
+
 		while (x < game->map_x)
 		{
-			set_characters(line[x], x, y, game);
+			ft_printf("\nset_characters(%c, map[%d][%d])", line[x], y, x);
+			
+			set_characters(line[x], y, x, game);
 			x++;
 		}
 		free(line);
@@ -37,17 +44,17 @@ void	set_maps(char *map, t_game *game)
 	}
 }
 
-void	set_characters(char chr, int x, int y, t_game *game)
+void	set_characters(char chr, int y, int x, t_game *game)
 {
-	game->map_raw[x][y] = chr;
+	game->map_raw[y][x] = chr;
 	if (chr == '1')
 	{
-		game->map_wall[x][y] = 1;
+		game->map_wall[y][x] = 1;
 	}
 	else if (chr == 'C')
 	{
 		game->collectibles += 1;
-		game->map_coll[x][y] = 1;
+		game->map_coll[y][x] = 1;
 	}
 	else if (chr == 'E')
 	{
@@ -60,6 +67,6 @@ void	set_characters(char chr, int x, int y, t_game *game)
 		game->players += 1;
 		game->player_x = x;
 		game->player_y = y;
-		game->map_vstd[x][y] = '1';
+		game->map_vstd[y][x] = '1';
 	}
 }

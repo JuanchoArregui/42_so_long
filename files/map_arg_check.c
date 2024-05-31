@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_arg_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 19:53:40 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/29 11:08:04 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/31 13:01:22 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	check_map_basic(char *map, t_game *game)
 	if (game->map_y < 3)
 		ft_exit_error("Error altura mínima mapa", game);
 	if (game->debug)
-		ft_printf("\n✅ Map dim. OK: %d x %d\n", game->map_x, game->map_y);
+		ft_printf("\n✅ Map dim. OK. array2d[y][x]:  [%d][%d]\n", game->map_y, game->map_x);
 	check_map_chars(map, game);
 
-		ft_printf("\nMIRAR AQUIIIIIIIIII despues de check_map_chars Map dim. OK: %d x %d\n", game->map_x, game->map_y);
+		ft_printf("\nMIRAR AQUIIIIIIIIII despues de check_map_chars Map dim. OK yx: %d x %d\n", game->map_y, game->map_x);
 
 
 

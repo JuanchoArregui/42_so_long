@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:38:26 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/30 13:54:23 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/31 13:15:59 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ typedef struct s_game
 	
 	t_imgs		imgs;
 
-	int			map_x;
 	int			map_y;
+	int			map_x;
 	char		**map_raw;
 	char		**map_wall;
 	char		**map_coll;
@@ -63,17 +63,17 @@ typedef struct s_game
 
 	int			exits;
 	int			exited;
-	int			exit_x;
 	int			exit_y;
+	int			exit_x;
 
 	int			players;
-	int			player_x;
 	int			player_y;
+	int			player_x;
 	int			player_steps;
 	int			player_score;
 
-	int			x;
 	int			y;
+	int			x;
 
 }	t_game;
 
@@ -92,19 +92,19 @@ void	check_map_chars(char *map, t_game *game);
 //files/maps_stuff.c
 void	init_maps(t_game *game);
 char	**init_map(t_game *game);
-void	populate_map(char **map, int map_x, int map_y);
+void	populate_map(char **map, int map_y, int map_x);
 void	free_map(char **map, int map_y);
 
 // files/maps_set.c
 void	set_maps(char *map, t_game *game);
-void	set_characters(char chr, int x, int y, t_game *game);
+void	set_characters(char chr, int y, int x, t_game *game);
 
 // files/maps_check.c
 void	check_map_full(t_game *game);
 void	check_map_boundaries(t_game *game);
 void	check_map_playable(t_game *game);
-int		check_pos(int x, int y, t_game *game);
-int		check_mov(int x, int y, t_game *game);
+int		check_pos(int y, int x, t_game *game);
+int		check_mov(int y, int x, t_game *game);
 
 //files/maps_print.c
 void	print_walls(t_game *game);

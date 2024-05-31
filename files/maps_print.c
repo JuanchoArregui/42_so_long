@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   maps_print.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:18:43 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/30 15:16:28 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/31 13:14:28 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	print_walls(t_game *game)
 {
-	int	x;
 	int	y;
+	int	x;
 
 	if (game->debug)
 	{
@@ -27,7 +27,7 @@ void	print_walls(t_game *game)
 			x = 0;
 			while (x < game->map_x)
 			{
-				if (game->map_wall[x][y])
+				if (game->map_wall[y][x])
 					ft_printf("🟧");
 				else
 					ft_printf("⬛");
@@ -41,8 +41,8 @@ void	print_walls(t_game *game)
 
 void	print_colls(t_game *game)
 {
-	int	x;
 	int	y;
+	int	x;
 
 	if (game->debug)
 	{
@@ -54,7 +54,7 @@ void	print_colls(t_game *game)
 			x = 0;
 			while (x < game->map_x)
 			{
-				if (game->map_coll[x][y])
+				if (game->map_coll[y][x])
 					ft_printf("🟡");
 				else
 					ft_printf("⬛");
@@ -68,12 +68,8 @@ void	print_colls(t_game *game)
 
 void	print_flood(t_game *game)
 {
-	int	x;
 	int	y;
-
-	ft_printf("\nPRINT FLOOD");
-	ft_printf("\ngame->map_x: %d", game->map_x);
-	ft_printf("\ngame->map_y: %d", game->map_y);
+	int	x;
 
 	if (game->debug)
 	{
@@ -84,9 +80,9 @@ void	print_flood(t_game *game)
 			x = 0;
 			while (x < game->map_x)
 			{
-				if (game->map_vstd[x][y] == '1')
+				if (game->map_vstd[y][x] == '1')
 					ft_printf("🟥");
-				else if (game->map_vstd[x][y])
+				else if (game->map_vstd[y][x])
 					ft_printf("⬜");
 				else
 					ft_printf("⬛");
@@ -100,31 +96,28 @@ void	print_flood(t_game *game)
 
 void	print_full_map_game(t_game *game)
 {
-	int	x;
-	int	y;
-
 	if (game->debug)
 	{
-		y = 0;
-		while (y < game->map_y)
+		game->y = 0;
+		while (game->y < game->map_y)
 		{
 			ft_printf("\n");
-			x = 0;
-			while (x < game->map_x)
+			game->x = 0;
+			while (game->x < game->map_x)
 			{
-				if (game->map_wall[x][y])
+				if (game->map_wall[game->y][game->x])
 					ft_printf("🟧");
-				else if (game->map_coll[x][y])
+				else if (game->map_coll[game->y][game->x])
 					ft_printf("🟡");
-				else if (x == game->player_x && y == game->player_y)
+				else if (game->x == game->player_x && game->y == game->player_y)
 					ft_printf("👤");
-				else if (x == game->exit_x && y == game->exit_y)
+				else if (game->x == game->exit_x && game->y == game->exit_y)
 					ft_printf("🟩");
 				else
 					ft_printf("⬛");
-				x++;
+				game->x++;
 			}
-			y++;
+			game->y++;
 		}
 		ft_printf("\n");
 	}

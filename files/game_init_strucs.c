@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init_strucs.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 19:53:40 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/30 13:43:14 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/31 13:25:26 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static void	init_game_struc_partial_1(t_game *game)
 	game->win = NULL;
 
 
-	game->map_x = 0;
 	game->map_y = 0;
+	game->map_x = 0;
 	game->map_raw = NULL;
 	game->map_wall = NULL;
 	game->map_coll = NULL;
@@ -39,17 +39,17 @@ static void	init_game_struc_partial_2(t_game *game)
 {
 	game->exits = 0;
 	game->exited = 0;
-	game->exit_x = 0;
 	game->exit_y = 0;
+	game->exit_x = 0;
 
 	game->players = 0;
-	game->player_x = 0;
 	game->player_y = 0;
+	game->player_x = 0;
 	game->player_steps = 0;
 	game->player_score = 0;
 
-	game->x = 0;
 	game->y = 0;
+	game->x = 0;
 }
 
 static void	init_game_imgs_struc(t_game *game)

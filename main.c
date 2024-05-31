@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:12:20 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/30 15:05:06 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/05/31 17:29:50 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 int on_destroy(t_game *game)
 {
 	ft_printf("\n******EVENTO ON DETROY************");
+	ft_printf("\n******game->map_y: %d************", game->map_y);
 	
 	ft_free_game(game);
 	exit(0);
@@ -98,43 +99,32 @@ void start_game(t_game *game)
 	reset_collectibles(game);
 	game->win_width = game->tile_dim * game->map_x;
 	game->win_height = game->tile_dim * game->map_y;
-
-	ft_printf("\n55555");
-	ft_printf("\ngame->map_x: %d", game->map_x);
-	ft_printf("\ngame->map_y: %d", game->map_y);
-	ft_printf("\ngame->win_width: %d", game->win_width);
-	ft_printf("\ngame->win_height: %d", game->win_height);
 	game->mlx = mlx_init();
-
-	ft_printf("\nincializado mlx");
-
-
-
-
 	if (!game->mlx)
 		ft_exit_error("Error al iniciar Minilib", game);
-	game->win = mlx_new_window(game->mlx, game->win_width, game->win_height, "so_long");
+	game->win = mlx_new_window(game->mlx, game->win_width,
+			game->win_height, "so_long");
 	if (!game->win)
 		ft_exit_error("Error al crear ventana", game);
-
-	ft_printf("\ncreada ventana win");
-
-	// Cargar las imágenes
 	load_images(game);
-
-	// Dibujar el mapa, personaje y coleccionables
 	draw_game(game);
+
+	//aqui todavía la variable game->map_y tiene el valor correcto, que en este caso es 5
+	ft_printf("\ncreada ventana win. check game->map_y: %d", game->map_y);
 
 
 	
 
 	// Register key press hook
-	mlx_hook(game->win, KeyPress, KeyPressMask, &on_keypress, &game);
+	ft_printf("\nantes de mlx_hook on_keypress. check game->map_y: %d", game->map_y);
+	mlx_hook(game->win, KeyPress, KeyPressMask, &on_keypress, game);
  
 	// Register destroy hook
-	mlx_hook(game->win, DestroyNotify, StructureNotifyMask, &on_destroy, &game);
+	ft_printf("\nantes de mlx_hook on_destroy. check game->map_y: %d", game->map_y);
+	mlx_hook(game->win, DestroyNotify, StructureNotifyMask, &on_destroy, game);
  
 	// Loop over the MLX pointer
+	ft_printf("\nantes de mlx_loop. check game->map_y: %d", game->map_y);
 	mlx_loop(game->mlx);
 
 	ft_printf("\n antes de salir de start_game");
@@ -156,33 +146,26 @@ int	main(int argc, char **argv)
 		ft_exit_error("Numero de argumentos incorrecto.", &game);
 	init_game_strucs(&game);
 
-	 printf("Game structure initialized.\n");
-
-	ft_printf("\n00000000");
-	ft_printf("\ngame->map_x: %d", game.map_x);
-	ft_printf("\ngame->map_y: %d", game.map_y);
-	ft_printf("\ngame.players: %d", game.players);
-
 
 	check_map_basic(argv[1], &game);
 
 	ft_printf("\n111111");
-	ft_printf("\ngame.map_x: %d", game.map_x);
 	ft_printf("\ngame.map_y: %d", game.map_y);
+	ft_printf("\ngame.map_x: %d", game.map_x);
 	ft_printf("\ngame.players: %d", game.players);
 
 	init_maps(&game);
 
 	ft_printf("\n22222");
-	ft_printf("\ngame.map_x: %d", game.map_x);
 	ft_printf("\ngame.map_y: %d", game.map_y);
+	ft_printf("\ngame.map_x: %d", game.map_x);
 	ft_printf("\ngame.players: %d", game.players);
 
 	set_maps(argv[1], &game);
 
 	ft_printf("\n3333");
-	ft_printf("\ngame.map_x: %d", game.map_x);
 	ft_printf("\ngame.map_y: %d", game.map_y);
+	ft_printf("\ngame.map_x: %d", game.map_x);
 	ft_printf("\ngame.players: %d", game.players);
 
 
