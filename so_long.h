@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:38:26 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/31 13:15:59 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/06/01 11:53:27 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,9 +116,6 @@ void	print_full_map_game(t_game *game);
 // files/mlx_load_images.c
 // Note: auxiliary functions marked as static, so no need to include the here
 void	load_images(t_game *game);
-
-// files/mlx_load_background.c
-void	create_and_load_background(t_game *game);
 
 // files/mlx_draw_game.c
 void	draw_tile(t_game *game, void *img, int x, int y);

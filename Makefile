@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jarregui <jarregui@student.42.fr>          +#+  +:+       +#+         #
+#    By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/05 16:13:08 by jarregui          #+#    #+#              #
-#    Updated: 2024/05/30 11:24:29 by jarregui         ###   ########.fr        #
+#    Updated: 2024/06/01 11:53:16 by jarregui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,6 @@ SRCS		=	main.c \
 			files/maps_stuff.c \
 			files/mlx_draw_game.c \
 			files/mlx_load_images.c \
-			files/mlx_load_background.c \
 			
 SRCS_BONUS	=	bonus/stuff_bonus.c
 

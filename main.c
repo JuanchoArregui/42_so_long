@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:12:20 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/31 17:29:50 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/06/01 12:11:41 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,48 @@ int on_destroy(t_game *game)
 	return (0);
 }
 
-int move_up(t_game *game)
+int	move_up(t_game *game)
 {
-	if (!game->map_wall[game->player_x][game->player_y + 1])
+	ft_printf("\nMOVE UP");
+	ft_printf("\nplayer en pos[%d][%d] checkeing for [%d][%d]", game->player_y, game->player_x,  game->player_y - 1, game->player_x);
+	
+	if (!game->map_wall[game->player_y - 1][game->player_x])
 	{
-		game->player_y += 1;
-		if (game->map_coll[game->player_x][game->player_y])
+		ft_printf("\nMOVE UP----> OK");
+		game->player_y -= 1;
+		if (game->map_coll[game->player_y][game->player_x])
 		{
-			game->map_coll[game->player_x][game->player_y] = 0;
+			game->map_coll[game->player_y][game->player_x] = 0;
 			game->coll_remain -= 1;
-			//aqui checar si coll_remain == 0 y si es así abrir la puerta!
 		}
-		//Aqui poner el codigo o función para que imprima esa tile o el mapa entero
+		draw_game(game);
 		return (1);
 	}
+	ft_printf("\nMOVE UP----> KOOO. hay pared");
+
+	return (0);
+}
+
+static int	try_move(t_game *game, int target_y, int target_x)
+{
+	ft_printf("\nTRYING MOVE");
+	ft_printf("\nplayer en pos[%d][%d] checkeing for [%d][%d]", game->player_y, game->player_x,  target_y, target_x);
+	
+	if (!game->map_wall[target_y][target_x])
+	{
+		ft_printf("\nMOVE ----> OK");
+		game->player_y = target_y;
+		game->player_x = target_x;
+		if (game->map_coll[target_y][target_x])
+		{
+			game->map_coll[target_y][target_x] = 0;
+			game->coll_remain -= 1;
+		}
+		draw_game(game);
+		return (1);
+	}
+	ft_printf("\nMOVE ----> KOOO. hay pared");
+
 	return (0);
 }
 
@@ -60,22 +88,29 @@ int on_keypress(int key_pressed, t_game *game)
 	else if (key_pressed == KEY_W)
 	{
 		ft_printf("\nUP");
-		move_up(game);
+		// move_up(game);
+		try_move(game, game->player_y - 1, game->player_x);
 		// 	moved = move_to(game, game->player.tile->up);
 	}
 	else if (key_pressed == KEY_S)
 	{
 		ft_printf("\nDOWN");
+		try_move(game, game->player_y + 1, game->player_x);
+
 		// 	moved = move_to(game, game->player.tile->down);
 	}
 	else if (key_pressed == KEY_A)
 	{
 		ft_printf("\nLEFT");
+		try_move(game, game->player_y, game->player_x - 1);
+
 		// 	moved = move_to(game, game->player.tile->left);
 	}
 	else if (key_pressed == KEY_D)
 	{
 		ft_printf("\nRIGHT");
+		try_move(game, game->player_y, game->player_x + 1);
+
 		// 	moved = move_to(game, game->player.tile->right);
 	}
 	else{
@@ -94,7 +129,7 @@ int on_keypress(int key_pressed, t_game *game)
 	return (0);
 }
 
-void start_game(t_game *game)
+void	start_game(t_game *game)
 {
 	reset_collectibles(game);
 	game->win_width = game->tile_dim * game->map_x;
@@ -108,28 +143,9 @@ void start_game(t_game *game)
 		ft_exit_error("Error al crear ventana", game);
 	load_images(game);
 	draw_game(game);
-
-	//aqui todavía la variable game->map_y tiene el valor correcto, que en este caso es 5
-	ft_printf("\ncreada ventana win. check game->map_y: %d", game->map_y);
-
-
-	
-
-	// Register key press hook
-	ft_printf("\nantes de mlx_hook on_keypress. check game->map_y: %d", game->map_y);
 	mlx_hook(game->win, KeyPress, KeyPressMask, &on_keypress, game);
- 
-	// Register destroy hook
-	ft_printf("\nantes de mlx_hook on_destroy. check game->map_y: %d", game->map_y);
 	mlx_hook(game->win, DestroyNotify, StructureNotifyMask, &on_destroy, game);
- 
-	// Loop over the MLX pointer
-	ft_printf("\nantes de mlx_loop. check game->map_y: %d", game->map_y);
 	mlx_loop(game->mlx);
-
-	ft_printf("\n antes de salir de start_game");
-
-	
 }
 
 int	main(int argc, char **argv)
@@ -145,37 +161,10 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		ft_exit_error("Numero de argumentos incorrecto.", &game);
 	init_game_strucs(&game);
-
-
 	check_map_basic(argv[1], &game);
-
-	ft_printf("\n111111");
-	ft_printf("\ngame.map_y: %d", game.map_y);
-	ft_printf("\ngame.map_x: %d", game.map_x);
-	ft_printf("\ngame.players: %d", game.players);
-
 	init_maps(&game);
-
-	ft_printf("\n22222");
-	ft_printf("\ngame.map_y: %d", game.map_y);
-	ft_printf("\ngame.map_x: %d", game.map_x);
-	ft_printf("\ngame.players: %d", game.players);
-
 	set_maps(argv[1], &game);
-
-	ft_printf("\n3333");
-	ft_printf("\ngame.map_y: %d", game.map_y);
-	ft_printf("\ngame.map_x: %d", game.map_x);
-	ft_printf("\ngame.players: %d", game.players);
-
-
 	check_map_full(&game);
-
-	ft_printf("\n44444");
-	ft_printf("\ngame.map_x: %d", game.map_x);
-	ft_printf("\ngame.map_y: %d", game.map_y);
-	ft_printf("\ngame.players: %d", game.players);
-
 	start_game(&game);
 	
 
@@ -183,41 +172,11 @@ int	main(int argc, char **argv)
 
 
 
-	ft_printf("\n antes de terminar main");
-
+	ft_printf("\n AQUI LLEGO?????????????????? antes de terminar main");
 	ft_free_game(&game);
+
 	return (0);
 }
-
-
-// TODO: mirar norma y empezar con la parte gr'afica
-
-
-
-
-
-
-// int	main(void)
-// {
-// 	void	*img;
-// 	void	*mlx;
-
-// 	mlx = mlx_init();
-// 	img = mlx_new_image(mlx, 1920, 1080);
-
-	
-
-// 	// mlx = mlx_init();
-// 	// if (!mlx)
-// 	// 	return (1);
-// 	// win = mlx_new_window(mlx, 600, 400, "hi :)");
-// 	// if (!win)
-// 	// 	return (free(mlx), 1);
-// 	// mlx_destroy_window(mlx, win);
-// 	// mlx_destroy_display(mlx);
-// 	// free(mlx);
-// 	return (0);
-// }
 
 //valgrind --leak-check=full --track-origins=yes ./so_long maps/map4.ber
 
