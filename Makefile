@@ -6,7 +6,7 @@
 #    By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/05 16:13:08 by jarregui          #+#    #+#              #
-#    Updated: 2024/06/25 13:14:24 by jarregui         ###   ########.fr        #
+#    Updated: 2024/06/25 15:56:03 by jarregui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,16 @@ SRCS		=	files/main.c \
 			files/mlx_draw_game.c \
 			files/mlx_load_images.c \
 			
-SRCS_BONUS	=	files_bonus/stuff_bonus.c
+SRCS_BONUS	=	files_bonus/main_bonus.c \
+			files_bonus/game_init_strucs_bonus.c \
+			files_bonus/game_stuff_bonus.c \
+			files_bonus/map_arg_check_bonus.c \
+			files_bonus/maps_check_bonus.c \
+			files_bonus/maps_print_bonus.c \
+			files_bonus/maps_set_bonus.c \
+			files_bonus/maps_stuff_bonus.c \
+			files_bonus/mlx_draw_game_bonus.c \
+			files_bonus/mlx_load_images_bonus.c \
 
 # VARIABLES DECLARATION:
 PROY_NAME		=	SO_LONG
@@ -117,12 +126,8 @@ install_mlx:
 	@echo "Copying mlx.h to /usr/include/X11"
 	@sudo cp $(MLX_DIR)mlx.h /usr/include/X11/
 
-bonus: ${BONUS_OBJECTS}
-	@echo "\n${ORANGE}Minilibx compilation $(DEF_COLOR)\n"
-	@touch $@
-	@make -C ${MLX_DIR} all
-	@cp ${MLX_DIR}/libmlx.a .
-	@$(CC) $(SRCS_BONUS) $(MLX_FLAGS) -o $(BONUS_NAME)
+bonus:	subsystems ${BONUS_OBJECTS}
+	@$(CC) ${CFLAGS} $(INCLUDE_FLAGS) $(MLX_FLAGS) ${BONUS_OBJECTS} ${LIBS} $(MLX_FLAGS) -o $(BONUS_NAME)
 	@echo "$(GREEN)✓ Created ${BONUS_NAME}$(DEF_COLOR)\n"
 
 clean:
