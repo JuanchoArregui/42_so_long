@@ -6,11 +6,11 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 19:53:40 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/31 17:58:54 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/06/25 13:12:02 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "so_long.h"
 
 int	ft_strlen_no_n(char *s)
 {
@@ -48,16 +48,10 @@ void	ft_free_game(t_game *game)
 		mlx_destroy_display(game->mlx);
 }
 
-void	ft_get_leaks(void)
-{
-	ft_printf("\n\nCHECKING FOR LEAKS AT EXIT:\n");
-	system("leaks -q so_long");
-	ft_printf("\n");
-}
-
 void	reset_collectibles(t_game *game)
 {
 	game->coll_remain = 0;
+	game->exited = 0;
 	game->y = 0;
 	while (game->y < game->map_y)
 	{
@@ -72,5 +66,22 @@ void	reset_collectibles(t_game *game)
 			game->x++;
 		}
 		game->y++;
+	}
+}
+
+void	check_exit(t_game *game)
+{
+	int	pos_x;
+	int	pos_y;
+
+	pos_x = ((game->map_x * game->tile_dim) / 2) - (game->tile_dim * 1.5);
+	pos_y = (game->map_y * game->tile_dim) / 2;
+	if (game->coll_remain == 0 && game->player_y == game->exit_y
+		&& game->player_x == game->exit_x)
+	{
+		game->exited = 1;
+		mlx_clear_window(game->mlx, game->win);
+		mlx_string_put(game->mlx, game->win, pos_x, pos_y, 0xFFA500,
+			"    Mission Accomplished!!");
 	}
 }

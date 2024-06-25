@@ -6,7 +6,7 @@
 #    By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/05 16:13:08 by jarregui          #+#    #+#              #
-#    Updated: 2024/06/01 11:53:16 by jarregui         ###   ########.fr        #
+#    Updated: 2024/06/25 13:14:24 by jarregui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ else
 	INCLUDES = -I/opt/X11/include -Imlx
 endif
 
-SRCS		=	main.c \
+SRCS		=	files/main.c \
 			files/game_init_strucs.c \
 			files/game_stuff.c \
 			files/map_arg_check.c \
@@ -31,34 +31,24 @@ SRCS		=	main.c \
 			files/mlx_draw_game.c \
 			files/mlx_load_images.c \
 			
-SRCS_BONUS	=	bonus/stuff_bonus.c
+SRCS_BONUS	=	files_bonus/stuff_bonus.c
 
 # VARIABLES DECLARATION:
 PROY_NAME		=	SO_LONG
 NAME			=	so_long
 BONUS_NAME		=	so_long_bonus
-CC				=	gcc -g # QUITAR el -g para entregarrrr
+CC				=	gcc
 RM				=	rm -f
 AR				=	ar rc
 RN				=	ranlib
 # CFLAGS			=	-g -Wall -Wextra -Werror -fsanitize=address
 CFLAGS			=	-Wall -Wextra -Werror
 
-# MinilibX directory, macro and flags for LInux or Mac
-ifeq ($(shell uname), Linux)
-	MLX_DIR = libs/minilib/minilibx_linux
-	CFLAGS +=  -Wno-unused-result
-else
-	MLX_DIR = libs/minilib/minilibx_opengl
-endif
-
+# MinilibX directory, macro and flags for LInux
+MLX_DIR = libs/minilib
+CFLAGS +=  -Wno-unused-result
 MLX_FLAGS		=	-L$(MLX_DIR) -lmlx
-
-ifeq ($(shell uname), Linux)
-	MLX_FLAGS += -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
-else
-	MLX_FLAGS += -framework OpenGL -framework AppKit
-endif
+MLX_FLAGS += -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
 MLX_LIB = $(MLX_DIR)/libmlx.a
 LIBFT_DIR = libs/libft

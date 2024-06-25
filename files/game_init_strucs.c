@@ -6,15 +6,15 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 19:53:40 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/31 18:05:36 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/06/25 13:11:53 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "so_long.h"
 
 static void	init_game_struc_partial_1(t_game *game)
 {
-	game->debug = 1;
+	game->debug = 0;
 	game->mlx = NULL;
 	game->tile_dim = 64;
 	game->win_width = 0;

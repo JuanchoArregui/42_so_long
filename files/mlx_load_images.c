@@ -6,66 +6,65 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:57:23 by jarregui          #+#    #+#             */
-/*   Updated: 2024/06/01 11:54:50 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/06/25 13:17:06 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "so_long.h"
 
-static void *create_and_load_background(t_game *game) {
-	int		y;
-	int		x;
+static void	set_wall_img(t_game *game)
+{
+	char	*wall_data;
+	int		bg_pxl_index;
+	int		wall_pixel_index;
+	int		i;
+	int		j;
 
+	wall_data = mlx_get_data_addr(game->imgs.wall, &game->bg.wall_bpp,
+			&game->bg.wall_size_line, &game->bg.wall_endian);
+	i = 0;
+	while (i < game->tile_dim)
+	{
+		j = 0;
+		while (j < game->tile_dim)
+		{
+			bg_pxl_index = ((game->y * game->tile_dim + j) * game->win_width
+					+ (game->x * game->tile_dim + i)) * (game->bg.bpp / 8);
+			wall_pixel_index = (j * game->tile_dim + i)
+				* (game->bg.wall_bpp / 8);
+			ft_memcpy(&game->bg.data[bg_pxl_index],
+				&wall_data[wall_pixel_index], game->bg.wall_bpp / 8);
+			j++;
+		}
+		i++;
+	}
+}
+
+static void	*create_and_load_background(t_game *game)
+{
 	void	*img_ptr;
-	char	*background_data;
-	int		background_bpp;
-	int		background_size_line;
-	int		background_endian;
 
-	ft_printf("\nx: %d, y: %d", game->x, game->y);
-	
+	game->y = 0;
+	game->x = 0;
 	img_ptr = mlx_new_image(game->mlx, game->win_width, game->win_height);
 	if (!img_ptr)
 		ft_exit_error("Error al cargar la imagen del background", game);
-	background_data = mlx_get_data_addr(img_ptr, &background_bpp, &background_size_line, &background_endian);
-
-	y = 0;
-	while (y < game->map_y)
+	game->bg.data = mlx_get_data_addr(img_ptr, &game->bg.bpp,
+			&game->bg.size_line, &game->bg.endian);
+	game->y = 0;
+	while (game->y < game->map_y)
 	{
-		x = 0;
-		while (x < game->map_x)
+		game->x = 0;
+		while (game->x < game->map_x)
 		{
-			if (game->map_wall[y][x])
-			{
-				char    *wall_data;
-                int     wall_bpp;
-                int     wall_size_line;
-                int     wall_endian;
-				// Get the data address of the wall image
-                wall_data = mlx_get_data_addr(game->imgs.wall, &wall_bpp, &wall_size_line, &wall_endian);
-
-                // Copy the wall image data to the correct position in the background image data
-                for (int i = 0; i < game->tile_dim; i++)
-                {
-                    for (int j = 0; j < game->tile_dim; j++)
-                    {
-                        int background_pixel_index = ((y * game->tile_dim + j) * game->win_width + (x * game->tile_dim + i)) * (background_bpp / 8);
-                        int wall_pixel_index = (j * game->tile_dim + i) * (wall_bpp / 8);
-
-                        memcpy(&background_data[background_pixel_index], &wall_data[wall_pixel_index], wall_bpp / 8);
-                    }
-                }
-			}
-				// mlx_put_image_to_window(game->mlx, img_ptr, game->imgs.wall, 
-				// 	x * game->tile_dim, y * game->tile_dim);
-			x++;
+			if (game->map_wall[game->y][game->x])
+				set_wall_img(game);
+			game->x++;
 		}
-		y++;
+		game->y++;
 	}
 	return (img_ptr);
-	// Añadir otros elementos estáticos si es necesario
 }
-
 
 static void	*ft_load_xpm(t_game *game, char *file)
 {
@@ -93,4 +92,3 @@ void	load_images(t_game *game)
 	if (game->debug)
 		ft_printf("\n✅ Imágenes necesarias cargadas satisfactoriamente\n");
 }
-

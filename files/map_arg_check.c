@@ -6,11 +6,11 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 19:53:40 by jarregui          #+#    #+#             */
-/*   Updated: 2024/05/31 17:59:32 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/06/25 13:12:27 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "so_long.h"
 
 void	check_map_basic(char *map, t_game *game)
 {
