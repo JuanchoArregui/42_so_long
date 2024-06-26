@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 19:53:40 by jarregui          #+#    #+#             */
-/*   Updated: 2024/06/25 15:34:40 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/06/26 20:48:10 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,35 @@ static void	init_game_struc_partial_2(t_game *game)
 	game->players = 0;
 	game->player_y = 0;
 	game->player_x = 0;
+	game->enem_y = 0;
+	game->enem_x = 0;
 	game->player_steps = 0;
 	game->player_score = 0;
 	game->y = 0;
 	game->x = 0;
+	game->loop_counter = 0;
+	game->loop_current_frame = 0;
+}
+
+static void	init_img_struc(t_img *img)
+{
+	img->ptr = NULL;
+	img->data = NULL;
+	img->bpp = 0;
+	img->size_line = 0;
+	img->endian = 0;
 }
 
 static void	init_game_imgs_struc(t_game *game)
 {
-	game->imgs.wall = NULL;
-	game->imgs.coll = NULL;
-	game->imgs.player = NULL;
-	game->imgs.door_open = NULL;
-	game->imgs.door_close = NULL;
-	game->imgs.background = NULL;
+	init_img_struc(&game->imgs.wall);
+	init_img_struc(&game->imgs.coll);
+	init_img_struc(&game->imgs.coll_frame);
+	init_img_struc(&game->imgs.player);
+	init_img_struc(&game->imgs.enemy);
+	init_img_struc(&game->imgs.door_open);
+	init_img_struc(&game->imgs.door_close);
+	init_img_struc(&game->imgs.bg);
 }
 
 void	init_game_strucs(t_game *game)

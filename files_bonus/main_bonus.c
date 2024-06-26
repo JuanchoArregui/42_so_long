@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:12:20 by jarregui          #+#    #+#             */
-/*   Updated: 2024/06/25 16:11:34 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/06/27 00:16:01 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,6 @@ int	on_destroy(t_game *game)
 	ft_free_game(game);
 	exit(0);
 	return (0);
-}
-
-static void	ft_get_leaks(void)
-{
-	ft_printf("\n\nCHECKING FOR LEAKS AT EXIT:\n");
-	system("leaks -q so_long");
-	ft_printf("\n");
 }
 
 static int	try_move(t_game *game, int target_y, int target_x, char *text)
@@ -74,7 +67,7 @@ int	on_keypress(int key_pressed, t_game *game)
 	return (0);
 }
 
-void	start_game(t_game *game)
+static void	start_game(t_game *game)
 {
 	reset_collectibles(game);
 	game->win_width = game->tile_dim * game->map_x;
@@ -90,14 +83,13 @@ void	start_game(t_game *game)
 	draw_game(game);
 	mlx_hook(game->win, KeyPress, KeyPressMask, &on_keypress, game);
 	mlx_hook(game->win, DestroyNotify, StructureNotifyMask, &on_destroy, game);
+	mlx_loop_hook(game->mlx, update_anim, game);
 	mlx_loop(game->mlx);
 }
 
 int	main(int argc, char **argv)
 {
 	t_game	game;
-
-atexit(ft_get_leaks);
 
 	if (argc == 1)
 		ft_exit_error("Falta el nombre archivo del mapa a jugar.", &game);
@@ -123,4 +115,3 @@ atexit(ft_get_leaks);
 // }
 
 //valgrind --leak-check=full --track-origins=yes ./so_long maps/map4.ber
-//project with pacman: https://github.com/madebypixel02/so_long

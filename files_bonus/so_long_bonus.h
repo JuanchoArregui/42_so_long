@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:38:26 by jarregui          #+#    #+#             */
-/*   Updated: 2024/06/25 15:36:07 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/06/27 00:05:53 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,28 @@
 # define DOWN 65364
 # define LEFT 65361
 # define RIGHT 65363
+# define NUM_FRAMES 10
 
-typedef struct s_imgs
+typedef struct s_img
 {
-	void		*wall;
-	void		*coll;
-	void		*player;
-	void		*door_open;
-	void		*door_close;
-	void		*background;
-}	t_imgs;
-
-typedef struct s_bg
-{
+	void		*ptr;
 	char		*data;
 	int			bpp;
 	int			size_line;
 	int			endian;
-	int			wall_bpp;
-	int			wall_size_line;
-	int			wall_endian;
-}	t_bg;
+}	t_img;
+
+typedef struct s_imgs
+{
+	t_img		wall;
+	t_img		coll;
+	t_img		coll_frame;
+	t_img		player;
+	t_img		enemy;
+	t_img		door_open;
+	t_img		door_close;
+	t_img		bg;
+}	t_imgs;
 
 typedef struct s_game
 {
@@ -64,7 +65,6 @@ typedef struct s_game
 	void		*win;
 
 	t_imgs		imgs;
-	t_bg		bg;
 
 	int			map_y;
 	int			map_x;
@@ -88,9 +88,14 @@ typedef struct s_game
 	int			player_steps;
 	int			player_score;
 
+	int			enem_y;
+	int			enem_x;
+
 	int			y;
 	int			x;
 
+	int			loop_counter;
+	int			loop_current_frame;
 }	t_game;
 
 // files_bonus/main.c
@@ -144,5 +149,10 @@ void	ft_exit_error(const char *text, t_game *game);
 void	ft_free_game(t_game *game);
 void	reset_collectibles(t_game *game);
 void	check_exit(t_game *game);
+
+// files_bonus/mlx_animate_game.c
+void	set_img_dims(t_game *game, t_img *img, int dim_x, int dim_y);
+int		update_anim(t_game *game);
+void	generate_frame(t_game *game, t_img *sprite, t_img *frame);
 
 #endif
