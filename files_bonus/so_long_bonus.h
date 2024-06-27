@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:38:26 by jarregui          #+#    #+#             */
-/*   Updated: 2024/06/27 00:05:53 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/06/27 19:00:39 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@
 # include "../libs/libft/libft.h"
 # include "../libs/printf/printf.h"
 # include "../libs/minilib/mlx.h"
-# include <stdlib.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include <stdlib.h>
+# include <math.h>
 
 /* key codes */
 # define KEY_ESC 65307
@@ -48,7 +49,8 @@ typedef struct s_imgs
 	t_img		coll;
 	t_img		coll_frame;
 	t_img		player;
-	t_img		enemy;
+	t_img		enemy_a;
+	t_img		enemy_b;
 	t_img		door_open;
 	t_img		door_close;
 	t_img		bg;
@@ -88,6 +90,7 @@ typedef struct s_game
 	int			player_steps;
 	int			player_score;
 
+	int			enemy;
 	int			enem_y;
 	int			enem_x;
 
@@ -148,11 +151,19 @@ int		ft_strlen_no_n(char *s);
 void	ft_exit_error(const char *text, t_game *game);
 void	ft_free_game(t_game *game);
 void	reset_collectibles(t_game *game);
-void	check_exit(t_game *game);
 
 // files_bonus/mlx_animate_game.c
+void	set_enemy(t_game *game);
+void	move_enemy(t_game *game, int dif_x, int dif_y);
 void	set_img_dims(t_game *game, t_img *img, int dim_x, int dim_y);
 int		update_anim(t_game *game);
 void	generate_frame(t_game *game, t_img *sprite, t_img *frame);
+
+// files_bonus/game_random.c
+void	generate_random_number(unsigned int *random_number, t_game *game);
+int		get_random_enemy_number(t_game *game);
+void	transform_coll_to_enemy(t_game *game, int coll_enemy);
+void	check_exit(t_game *game);
+void	check_death(t_game *game);
 
 #endif

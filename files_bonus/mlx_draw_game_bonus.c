@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 10:49:13 by jarregui          #+#    #+#             */
-/*   Updated: 2024/06/27 00:11:29 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/06/27 11:21:04 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,9 @@ void	draw_game(t_game *game)
 	else
 		draw_tile(game, game->imgs.door_close.ptr, game->exit_x, game->exit_y);
 	draw_tile(game, game->imgs.player.ptr, game->player_x, game->player_y);
+	if (game->enemy && game->loop_current_frame < 5)
+		draw_tile(game, game->imgs.enemy_a.ptr, game->enem_x, game->enem_y);
+	else if (game->enemy)
+		draw_tile(game, game->imgs.enemy_b.ptr, game->enem_x, game->enem_y);
 	draw_scoreboard(game);
 }

@@ -6,7 +6,7 @@
 #    By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/05 16:13:08 by jarregui          #+#    #+#              #
-#    Updated: 2024/06/27 00:18:03 by jarregui         ###   ########.fr        #
+#    Updated: 2024/06/27 19:03:21 by jarregui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRCS_BONUS	=	files_bonus/main_bonus.c \
 			files_bonus/mlx_draw_game_bonus.c \
 			files_bonus/mlx_load_images_bonus.c \
 			files_bonus/mlx_animate_game_bonus.c \
+			files_bonus/game_random_bonus.c \
 
 # VARIABLES DECLARATION:
 PROY_NAME		=	SO_LONG

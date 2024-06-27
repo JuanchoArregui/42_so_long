@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:57:23 by jarregui          #+#    #+#             */
-/*   Updated: 2024/06/27 00:16:41 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/06/27 11:13:39 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ void	load_images(t_game *game)
 	ft_load_tile_xpm(game, &game->imgs.door_open, "sprites/door_02.xpm");
 	ft_load_tile_xpm(game, &game->imgs.door_close, "sprites/door_01.xpm");
 	ft_load_tile_xpm(game, &game->imgs.player, "sprites/player.xpm");
-	ft_load_tile_xpm(game, &game->imgs.enemy, "sprites/enemy.xpm");
+	ft_load_tile_xpm(game, &game->imgs.enemy_a, "sprites/ghost_a.xpm");
+	ft_load_tile_xpm(game, &game->imgs.enemy_b, "sprites/ghost_b.xpm");
 	set_img_dims(game, &game->imgs.bg, game->win_width, game->win_height);
 	set_img_dims(game, &game->imgs.coll_frame, game->tile_dim, game->tile_dim);
 	generate_background(game);

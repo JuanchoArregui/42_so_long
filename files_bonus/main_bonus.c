@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:12:20 by jarregui          #+#    #+#             */
-/*   Updated: 2024/06/27 00:16:01 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/06/27 19:02:07 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	on_keypress(int key_pressed, t_game *game)
 static void	start_game(t_game *game)
 {
 	reset_collectibles(game);
+	set_enemy(game);
 	game->win_width = game->tile_dim * game->map_x;
 	game->win_height = game->tile_dim * (game->map_y + 1);
 	game->mlx = mlx_init();
@@ -80,7 +81,6 @@ static void	start_game(t_game *game)
 	if (!game->win)
 		ft_exit_error("Error al crear ventana", game);
 	load_images(game);
-	draw_game(game);
 	mlx_hook(game->win, KeyPress, KeyPressMask, &on_keypress, game);
 	mlx_hook(game->win, DestroyNotify, StructureNotifyMask, &on_destroy, game);
 	mlx_loop_hook(game->mlx, update_anim, game);

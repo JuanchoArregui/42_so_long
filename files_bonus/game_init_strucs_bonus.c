@@ -6,7 +6,7 @@
 /*   By: jarregui <jarregui@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 19:53:40 by jarregui          #+#    #+#             */
-/*   Updated: 2024/06/26 20:48:10 by jarregui         ###   ########.fr       */
+/*   Updated: 2024/06/27 17:16:22 by jarregui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void	init_game_struc_partial_2(t_game *game)
 	game->players = 0;
 	game->player_y = 0;
 	game->player_x = 0;
+	game->enemy = 0;
 	game->enem_y = 0;
 	game->enem_x = 0;
 	game->player_steps = 0;
@@ -65,7 +66,8 @@ static void	init_game_imgs_struc(t_game *game)
 	init_img_struc(&game->imgs.coll);
 	init_img_struc(&game->imgs.coll_frame);
 	init_img_struc(&game->imgs.player);
-	init_img_struc(&game->imgs.enemy);
+	init_img_struc(&game->imgs.enemy_a);
+	init_img_struc(&game->imgs.enemy_b);
 	init_img_struc(&game->imgs.door_open);
 	init_img_struc(&game->imgs.door_close);
 	init_img_struc(&game->imgs.bg);
